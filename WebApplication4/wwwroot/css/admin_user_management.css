@@ -283,7 +283,7 @@ background-color: #ddd;
 background-position: left;
 padding-left: 30px;
 align-items: center;
-background-image: url(image/calendar2.png);
+background-image: url(~/image/calendar2.png);
 }
 
 .menu li button {

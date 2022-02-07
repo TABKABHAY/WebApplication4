@@ -47,6 +47,7 @@ img.logo {
 }
 
 .login {
+    text-decoration:none;
     margin: 10px;
     /* top: 43px; */
     /* left: 1210px; */

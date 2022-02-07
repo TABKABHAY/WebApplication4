@@ -3,6 +3,7 @@
     text-align: center;
 }
 .backimge {
+    background-image: url(../image/become-a-pro-banner.png);
     text-align: center;
     background-repeat: round;
 }

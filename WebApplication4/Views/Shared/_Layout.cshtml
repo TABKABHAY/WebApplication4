@@ -10,7 +10,7 @@
     <!-- !PAGE CONTENT header -->
     <header class="hdr1">
         <div class="head">
-            <div class="imhlogo"><a href="Homepage.html"><img src='image/logo-large.png' alt="logo" class="logo"   asp-area="" asp-controller="Home" asp-action="Index"></a></div>
+            <div class="imhlogo"><a href="Homepage.html"><img src='~/image/logo-large.png' alt="logo" class="logo"   asp-area="" asp-controller="Home" asp-action="Index"></a></div>
             <div class="leftblock">
                 <button class="login">bookcleaner</button>
                 <a class="pargaraph" asp-controller="home" asp-action="Price">prices</a>
@@ -18,7 +18,7 @@
                 <a class="pargaraph">blog</a>
                 <a class="pargaraph" asp-controller="home" asp-action="Contact">Contact</a>
                 <button class="login" onclick="document.getElementById('id01').style.display='block'">Login</button>
-                <button class="login">becomehelper</button>
+                <a class="login"asp-controller="home" asp-action="Service_Provider_Become_a_Pro">Become Helper</a>
             </div>
             <div class="hembg">
                 <button onclick="w3_open()">☰</button>
@@ -44,7 +44,7 @@
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close"
                           title="Close Modal">&times</span>
-                    <img src="image/user1.jpg" alt="Avatar" class="avatar">
+                    <img src="~/image/user1.jpg" alt="Avatar" class="avatar">
                 </div>
 
                 <div class="container">
@@ -79,19 +79,19 @@
     <footer class="helpfooter">
         <div class="Rectangle-12">
             <div class="ftrnav">
-                <a href="Homepage.html"><img class="smalllogo" src="image/logo-small.png"></a>
+                <a href="Homepage.html"><img class="smalllogo" src="~/image/logo-small.png"></a>
                 <div class="homeabout">
                     <a href="Homepage.html" class="">HOME</a>
-                    <a href="about.html" class="">ABOUT</a>
+                    <a asp-controller="home" asp-action="About">About</a>
                     <a href="" class="">TESTIMONIALS</a>
-                    <a href="FAQ.html" class="">FAQS</a>
+                    <a asp-controller="home" asp-action="faq">FAQ</a>
                     <a href="" class="">INSURANCE POLICY</a>
                     <a href="" class="">IMPRESSUM</a>
                     <a href="" class="">INSURANCE</a>
                 </div>
                 <div class="social">
-                    <img class="insta" src="image/ic-instagram.png" alt="">
-                    <img class="facebook" src="image/ic-facebook.png" alt="">
+                    <img class="insta" src="~/image/ic-instagram.png" alt="">
+                    <img class="facebook" src="~/image/ic-facebook.png" alt="">
                 </div>
             </div>
         </div>
