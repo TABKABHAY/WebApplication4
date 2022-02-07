@@ -1,0 +1,111 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="~/css/hederfooter.css">
+    <link rel="image" href="~/image">
+    <link rel="script" href="~/js/">
+</head>
+<body>
+    <!-- !PAGE CONTENT header -->
+    <header class="hdr1">
+        <div class="head">
+            <div class="imhlogo"><a href="Homepage.html"><img src='image/logo-large.png' alt="logo" class="logo"   asp-area="" asp-controller="Home" asp-action="Index"></a></div>
+            <div class="leftblock">
+                <button class="login">bookcleaner</button>
+                <a class="pargaraph" asp-controller="home" asp-action="Price">prices</a>
+                <a class="pargaraph">ourguarantee</a>
+                <a class="pargaraph">blog</a>
+                <a class="pargaraph" asp-controller="home" asp-action="Contact">Contact</a>
+                <button class="login" onclick="document.getElementById('id01').style.display='block'">Login</button>
+                <button class="login">becomehelper</button>
+            </div>
+            <div class="hembg">
+                <button onclick="w3_open()">☰</button>
+            </div>
+        </div>
+        <!-- !PAGE CONTENT header -->
+        <!-- Sidebar -->
+        <div class="nevdata" onclick="document.getElementById('nevdata').style.display='none'">
+            <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="display:none;">
+                <button onclick="w3_close()" class="w3-bar-item w3-large">Close  × </button>
+                <a href="#" class="w3-bar-item w3-button">bookcleaner</a>
+                <a href="price.html" class="w3-bar-item w3-button">prices</a>
+                <a href="#" class="w3-bar-item w3-button">ourguarantee</a>
+                <a href="#" class="w3-bar-item w3-button">blog</a>
+                <a href="contact.html" class="w3-bar-item w3-button">Contact</a>
+                <a class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'">Login</a>
+                <a href="#" class="w3-bar-item w3-button">becomehelper</a>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div id="id01" class="modal">
+            <form class="modal-content animate" method="post">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                          title="Close Modal">&times</span>
+                    <img src="image/user1.jpg" alt="Avatar" class="avatar">
+                </div>
+
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    <button type="submit">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">
+                        Cancel
+                    </button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+    </header>
+    <!-- !PAGE CONTENT 1 -->
+    <div>
+        @RenderBody()
+    </div>
+
+    <!---!PAGE CONTENTFOOTER!-->
+    <footer class="helpfooter">
+        <div class="Rectangle-12">
+            <div class="ftrnav">
+                <a href="Homepage.html"><img class="smalllogo" src="image/logo-small.png"></a>
+                <div class="homeabout">
+                    <a href="Homepage.html" class="">HOME</a>
+                    <a href="about.html" class="">ABOUT</a>
+                    <a href="" class="">TESTIMONIALS</a>
+                    <a href="FAQ.html" class="">FAQS</a>
+                    <a href="" class="">INSURANCE POLICY</a>
+                    <a href="" class="">IMPRESSUM</a>
+                    <a href="" class="">INSURANCE</a>
+                </div>
+                <div class="social">
+                    <img class="insta" src="image/ic-instagram.png" alt="">
+                    <img class="facebook" src="image/ic-facebook.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="privicy">
+            <p class="privicypolicy">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula
+                aliquam ac.<a href="">
+                    Privacy Policy
+                </a>
+            </p>
+            <button class="ok">OK!</button>
+        </div>
+    </footer>
+    <script src="~/js/home.js"></script>
+</body>
+
+</html>
