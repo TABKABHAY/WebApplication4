@@ -20,6 +20,18 @@ namespace WebApplication4.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return Login();
+        }
+        
+        public IActionResult verify(Acc)
+        {
+            return Login();
+        }
+
         public IActionResult Price()
         {
             return View();
