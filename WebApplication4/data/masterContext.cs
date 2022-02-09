@@ -21,6 +21,7 @@ namespace WebApplication4
         public virtual DbSet<ContactU> ContactUs { get; set; }
         public virtual DbSet<ContactUsAttachment> ContactUsAttachments { get; set; }
         public virtual DbSet<FavoriteAndBlocked> FavoriteAndBlockeds { get; set; }
+        public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
         public virtual DbSet<ServiceRequestAddress> ServiceRequestAddresses { get; set; }
@@ -37,7 +38,7 @@ namespace WebApplication4
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(" Data Source =ABTANKPC;initial catalog=master; Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=ABTANKPC;Database=master;Trusted_Connection=True;");
             }
         }
 
@@ -115,6 +116,24 @@ namespace WebApplication4
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_FavoriteAndBlocked_FavoriteAndBlocked");
+            });
+
+            modelBuilder.Entity<Login>(entity =>
+            {
+                entity.ToTable("Login");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("password")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Rating>(entity =>

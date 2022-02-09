@@ -30,18 +30,21 @@
 <div class="gettouch">
     <h1 class="center"> GET IN TOUCH WITH US</h1>
     <div class="center getfrm">
-        <input type="name" placeholder="first name">
-        <input type="name" placeholder="last name"><br>
-        <input type="number" placeholder="mobile number">
-        <input type="email" placeholder="email address"><br>
-        <select class="suject">
-            <option value="">subject</option>
-            <option value="comp">sub1</option>
-            <option value="ppa">sub2</option>
-        </select>
-        </br>
-        <input class="message" type="text" placeholder="Message"></br>
-        <button class="bootn" value="submit">submit</button>
+        <form method="post" asp-controller="Home" asp-action="ContactUs">
+            <input type="name" placeholder="first name">
+            <input type="name" placeholder="last name"><br>
+            <input type="number" placeholder="mobile number">
+            <input type="email" placeholder="email address"><br>
+            <select class="suject">
+                <option value="">subject</option>
+                <option value="comp">sub1</option>
+                <option value="ppa">sub2</option>
+            </select>
+            <br>
+            <input class="message" type="text" placeholder="Message"><br>
+            <button class="bootn" value="submit">submit</button>
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ep2B1CZsAxGjeyQKtlsxLrUjNGzMNbmTi3iQ8jYxB7YAfATpDR-qsDkWP0wXNCqh_D7Eo-l7Qmi2CrA29IMV49zMr4TaQRIrYOrsX9kPRgYaz4y_d3Rr-8PYddIEmg0s0echqSe4rmmClFnoYIcTV8">
+        </form>
     </div>
 </div>
 <div class="center map">

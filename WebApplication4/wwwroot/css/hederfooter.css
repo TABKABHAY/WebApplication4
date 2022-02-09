@@ -9,7 +9,7 @@
 }
 
 .head {
-    justify-content: space-evenly;
+    justify-content:space-between;
     align-items: center;
     /* padding: 10px; */
     background-color: #0000009c;
@@ -287,6 +287,12 @@ button:hover {
     margin: 20px 0 12px 0;
     position: relative;
 }
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 50%;
+}
 
 .avatar {
     width: 70%;
@@ -322,8 +328,6 @@ span.psw {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
 }
-
-/* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
@@ -373,7 +377,7 @@ span.psw {
     }
 }
 
-@media (max-width:850px) {
+@media (max-width:870px) {
     .leftblock {
         display: none;
     }

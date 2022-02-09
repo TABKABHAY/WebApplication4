@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,13 @@ namespace WebApplication4.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
+        private readonly masterContext _context;
         public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult Login()
         {
             return View();
         }
@@ -20,18 +27,6 @@ namespace WebApplication4.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return Login();
-        }
-        
-        public IActionResult verify(Acc)
-        {
-            return Login();
-        }
-
         public IActionResult Price()
         {
             return View();
@@ -49,6 +44,13 @@ namespace WebApplication4.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Visitor(ContactU o)
+        {
+            _context.ContactUs.Add(o);
+            _context.SaveChanges();
+            return View("ContactUs");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
