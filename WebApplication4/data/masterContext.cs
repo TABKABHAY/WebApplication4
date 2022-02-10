@@ -293,9 +293,7 @@ namespace WebApplication4
 
                 entity.Property(e => e.BankTokenId).HasMaxLength(100);
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -312,8 +310,6 @@ namespace WebApplication4
                 entity.Property(e => e.Mobile)
                     .IsRequired()
                     .HasMaxLength(20);
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Password).HasMaxLength(100);
 

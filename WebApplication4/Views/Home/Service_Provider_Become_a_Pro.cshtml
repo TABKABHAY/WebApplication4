@@ -1,31 +1,36 @@
-﻿@{
+﻿
+@model WebApplication4.User
+
+@{
     ViewData["Title"] = "Service_Provider_Become_a_Pro";
 }
 <link rel="image" href="~/image/">
 <link rel="stylesheet" href="~/css/service_provider_become_pro.css">
 <section>
     <div class="backimge">
-        <div class="frm">
-            <h1>REGISTER NOW</h1>
-            <input type="name" placeholder="first name"><br><br>
-            <input type="name" placeholder="last name"><br><br>
-            <input type="email" placeholder="email address"><br><br>
-            <input type="number" placeholder="mobile number"><br><br>
-            <input type="passwrd" placeholder="password"><br><br>
-            <input type="passwrd" placeholder="confirm password"><br><br>
-            <input type="checkbox">
-            <label>Send me newsletters from Helperland</label><br><br>
-            <input type="checkbox">
-            <label>I accept terms and conditions &amp; privacy policy</label><br><br>
-            <iframe sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
-                    scrolling="no" frameborder="0" name="a-6yfj6gjwyzpx" role="presentation" height="78" width="304"
-                    src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=your_site_key&amp;co=ZmlsZTo.&amp;hl=en&amp;v=VZKEDW9wslPbEc9RmzMqaOAP&amp;size=normal&amp;cb=yb9ah540r25u"
-                    title="reCAPTCHA"></iframe>
-            <button class="bootn" value="submit">
-                Get Started <img src="~/image/arrow-white.png" class="bord"
-                                 alt="">
-            </button></br></br>
-        </div>
+        <form method="post" asp-controller="Home" asp-action="CreateForProvider">
+            <div class="frm">
+                <h1>REGISTER NOW</h1>
+                <input type="name"asp-for="FirstName" placeholder="first name"><br><br>
+                <input type="name"asp-for="LastName" placeholder="last name"><br><br>
+                <input type="email" placeholder="email address"><br><br>
+                <input type="number" placeholder="mobile number"><br><br>
+                <input type="passwrd" placeholder="password"><br><br>
+                <input type="passwrd" placeholder="confirm password"><br><br>
+                <input type="checkbox">
+                <label>Send me newsletters from Helperland</label><br><br>
+                <input type="checkbox">
+                <label>I accept terms and conditions &amp; privacy policy</label><br><br>
+                <iframe sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
+                        scrolling="no" frameborder="0" name="a-6yfj6gjwyzpx" role="presentation" height="78" width="304"
+                        src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=your_site_key&amp;co=ZmlsZTo.&amp;hl=en&amp;v=VZKEDW9wslPbEc9RmzMqaOAP&amp;size=normal&amp;cb=yb9ah540r25u"
+                        title="reCAPTCHA"></iframe>
+                <button class="bootn" value="submit">
+                    Get Started <img src="~/image/arrow-white.png" class="bord"
+                                     alt="">
+                </button></br></br>
+            </div>
+        </form>
         <div><img src="~/image/group-18_5.png" class="dwn" alt=""></div>
     </div>
     <section class="center">
@@ -76,4 +81,3 @@
         </div>
     </div>
 </section>
-   

@@ -1,0 +1,49 @@
+﻿@model WebApplication4.Login
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm())
+{
+
+  <link rel="stylesheet" href="~/css/hederfooter.css">
+   <div id="id01" class="modal">
+       <div class="modal-content">
+           <div class="imgcontainer">
+               <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                     title="Close Modal">&times</span>
+               <img src="~/image/user1.jpg" alt="Avatar" class="avatar">
+           </div>
+           <form method="post" asp-controller="Home" asp-action="CreateForlogin">
+               <div class="container">
+                   <label for="Username"><b>username</b></label>
+                   <input type="text" asp-for="Username" placeholder="Enter Username" required>
+                   @*Html.TextBoxFor(x => x.Username)*@
+
+                   <label for="Password"><b>Password</b></label>
+                   <input type="password" asp-for="Password" placeholder="Enter Password" required>
+                   @*Html.PasswordFor(x => x.Password)*@
+
+                   <button class="w3-button">
+                       <input type="submit" value="submit">
+                   </button>
+                   <label>
+                       <input type="checkbox" checked="checked" name="remember"> Remember me
+                   </label>
+               </div>
+               </form>
+
+                   <div class="container" style="background-color:#f1f1f1">
+                       <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                               class="cancelbtn">
+                           Cancel
+                       </button>
+                       <span class="psw">
+                           "Forgot"
+                           <a href="#">password?</a>
+                       </span>
+                   </div>
+</div>
+</div>
+}

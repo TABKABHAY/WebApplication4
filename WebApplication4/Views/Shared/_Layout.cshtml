@@ -39,9 +39,9 @@
             </div>
         </div>
         <!-- Page Content -->
-        @Html.Partial("_login")
     </header>
     <!-- !PAGE CONTENT 1 -->
+    @Html.Partial("_Loginpage")
     <div>
         @RenderBody()
     </div>
@@ -50,7 +50,7 @@
     <footer class="helpfooter">
         <div class="Rectangle-12">
             <div class="ftrnav">
-               <a asp-controller="home" asp-action="Index"><img class="smalllogo" src="~/image/logo-small.png"></a>
+                <a asp-controller="home" asp-action="Index"><img class="smalllogo" src="~/image/logo-small.png"></a>
                 <div class="homeabout">
                     <a asp-controller="home" asp-action="Index"> HOME</a>
                     <a asp-controller="home" asp-action="About">About</a>

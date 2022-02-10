@@ -7,22 +7,29 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication4.Models;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication4.Controllers
 {
+  
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly masterContext _context;
+        private readonly masterContext _auc;
+        masterContext db = new masterContext();
+        public HomeController(masterContext auc)
+        {
+                _auc = auc;
+        }
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Login()
+        public IActionResult CreateSession()
         {
-            return View();
+            this.HttpContext.Session.SetString("sessionkey", "sessionvalue");
+            return RedirectToAction("GetSession");
         }
-
         public IActionResult Contact()
         {
             return View();
@@ -47,9 +54,48 @@ namespace WebApplication4.Controllers
         [HttpPost]
         public IActionResult Visitor(ContactU o)
         {
-            _context.ContactUs.Add(o);
-            _context.SaveChanges();
             return View("ContactUs");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult CreateForlogin(Login uc)
+        {
+            var verify = _auc.Logins.FirstOrDefault(y => y.Username.Equals(uc.Username));
+            if (verify == null)
+            {
+                uc.Id = 0;
+                _auc.Add(uc);
+                _auc.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string errormsg = "Email is already registered...login instead !";
+                TempData["ErrorMessage"] = errormsg;
+                return RedirectToAction("BecomeHelper", "Home");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateForProvider(User uc)
+        {
+            var verify = _auc.Users.FirstOrDefault(x => x.Email.Equals(uc.Email));
+            if (verify == null)
+            {
+                uc.UserTypeId = 1;
+                _auc.Add(uc);
+                _auc.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string errormsg = "Email is already registered...login instead !";
+                TempData["ErrorMessage"] = errormsg;
+                return RedirectToAction("BecomeHelper", "Home");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

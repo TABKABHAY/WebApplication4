@@ -27,7 +27,6 @@ namespace WebApplication4
         public int UserTypeId { get; set; }
         public int? RoleId { get; set; }
         public int? Gender { get; set; }
-        public DateTime? DateOfBirth { get; set; }
         public string WebSite { get; set; }
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }
@@ -37,8 +36,6 @@ namespace WebApplication4
         public int? LanguageId { get; set; }
         public int? NationalityId { get; set; }
         public string ResetKey { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
         public int ModifiedBy { get; set; }
         public bool IsApproved { get; set; }
         public bool IsActive { get; set; }
