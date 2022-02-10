@@ -3,10 +3,6 @@
 @{
     Layout = null;
 }
-
-@using (Html.BeginForm())
-{
-
   <link rel="stylesheet" href="~/css/hederfooter.css">
    <div id="id01" class="modal">
        <div class="modal-content">
@@ -17,17 +13,15 @@
            </div>
            <form method="post" asp-controller="Home" asp-action="CreateForlogin">
                <div class="container">
-                   <label for="Username"><b>username</b></label>
+                   <label>User NAME</label>
                    <input type="text" asp-for="Username" placeholder="Enter Username" required>
                    @*Html.TextBoxFor(x => x.Username)*@
 
-                   <label for="Password"><b>Password</b></label>
+                   <label>Password</label>
                    <input type="password" asp-for="Password" placeholder="Enter Password" required>
                    @*Html.PasswordFor(x => x.Password)*@
-
-                   <button class="w3-button">
-                       <input type="submit" value="submit">
-                   </button>
+                   <input class="w3-button" type="submit" value="submit" />
+                   
                    <label>
                        <input type="checkbox" checked="checked" name="remember"> Remember me
                    </label>
@@ -44,6 +38,5 @@
                            <a href="#">password?</a>
                        </span>
                    </div>
-</div>
-</div>
-}
+           </div>
+       </div>

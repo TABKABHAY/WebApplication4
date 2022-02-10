@@ -10,6 +10,7 @@ using WebApplication4.Models;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
 
+
 namespace WebApplication4.Controllers
 {
   
@@ -62,20 +63,22 @@ namespace WebApplication4.Controllers
 
         public IActionResult CreateForlogin(Login uc)
         {
-            var verify = _auc.Logins.FirstOrDefault(y => y.Username.Equals(uc.Username));
+
+            var verify = _auc.Logins.FirstOrDefault(x => x.Username.Equals(uc.Username));
             if (verify == null)
             {
-                uc.Id = 0;
-                _auc.Add(uc);
+               _auc.Add(uc);
                 _auc.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                string errormsg = "Email is already registered...login instead !";
+                string errormsg = "USER is already registered...login instead !";
                 TempData["ErrorMessage"] = errormsg;
                 return RedirectToAction("BecomeHelper", "Home");
             }
+
+
         }
 
         [HttpPost]

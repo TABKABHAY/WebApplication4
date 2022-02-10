@@ -44,11 +44,12 @@ namespace WebApplication4
             }
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
