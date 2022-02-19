@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "UserRegistration";
+}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="image" href="~/image/">
+<link rel="stylesheet" href="~/css/user_registration.css">
+
+<section class="registerDAT">
+    <h1>Creat Account</h1>
+    <div>
+        <img class="pricestar center" src="~/image/separator.png">
+    </div>
+    <div class="detl flx">
+        <form class="ff">
+            <div>
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name">
+            </div>
+            <div>
+                <input type="email" placeholder="E-Mail-Address">
+                <input type="number" placeholder="+49 Phone number">
+            </div>
+            <div>
+                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Repeat Password">
+            </div>
+            <div class="paragp">
+                <input type="checkbox">
+                <label>Yes, I would like to subscribe to the Helperland GmbH newsletter with vouchers,trends,<br /> promotions and individualized offers. I can unsubscribe from the<br /> newsletter at any time in the newsletter and in my customer account.</label>
+                <br />
+                <input type="checkbox">
+                <label>I accept terms and conditions of HelperLand</label>
+                <br />
+                <input type="checkbox">
+                <label>I have read the privacy policy</label>
+            </div>
+
+        <div>
+            <iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=2&amp;k=6LfV25IcAAAAAEhaM94ZyAWXQxViyg9Y6Rl6L2Oe&amp;co=aHR0cHM6Ly93ZWIxLmFuYXNvdXJjZS5jb206NDQz&amp;hl=en&amp;v=BycHQdSIhzR_1EcOLw2mOzYQ&amp;size=normal&amp;cb=ww48uviymxuz" width="304" height="78" role="presentation" name="a-m0oj0rymxdit" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+        </div>
+        <input type="button" id="search" value="REGISTER">
+       </form>
+
+        <p>Already registered? <a  asp-controller="home" asp-action="Index">log in now</a></p>
+
+    </div>
+</section>

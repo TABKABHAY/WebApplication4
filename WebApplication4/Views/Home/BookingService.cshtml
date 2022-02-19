@@ -1,0 +1,437 @@
+﻿@{
+    ViewData["Title"] = "BookingService";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="~/css/booking.css">
+<link href="~/image/">
+<link href="~/js/booking.js" />
+
+<section class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-12 clearfix">
+            <ul _ngcontent-c3="" class=" tab nav nav-tabs nav-justified payment-steps">
+                <li class="tablinks active" onclick="set_service(event, 'setup_service')" id="defaultOpen">
+                    <img src="~/image/setup-service.png" alt=".."> Setup Service
+                </li>
+                <li class="tablinks" onclick="set_service(event, 'schedule')" id="TimeScheduleBtn">
+                    <img src="~/image/schedule.png" alt=".."> Schedule & Plan
+                </li>
+                <li class="tablinks" onclick="set_service(event, 'your_details')" id="YourDataBtn">
+                    <img src="~/image/details.png" alt=".."> Your Details
+                </li>
+                <li class="tablinks" onclick="set_service(event, 'make_payment')" id="PaymentBtn">
+                    <img src="~/image/payment.png" alt="..">Payment
+                </li>
+            </ul>
+
+            <form id="ZipCode">
+                <div id="setup_service" class="tabcontent" style="display: none;">
+                    <h2>Enter Your Postal code</h2>
+                    <row>
+
+                        <input type="text" id="postalcode" placeholder="Enter Your Postal code" data-val="true"
+                               data-val-length="Please Enter Valid Postal Code" data-val-length-max="6"
+                               data-val-required="The postalcode field is required." maxlength="6" name="postalcode"
+                               value="">
+                        <span class="formwarning field-validation-valid" data-valmsg-for="postalcode"
+                              data-valmsg-replace="true"></span>
+
+                        <button type="button" class="continue" onclick="postalSubmit()">Check Availability</button>
+                    </row>
+                </div>
+            </form>
+            <form id="TimeSchedule">
+                <div id="schedule" class="tabcontent schedule" style="display:none;">
+
+
+                    <div class="row">
+                        <div class="col-6">
+                            <h2>when do you need cleaner?</h2>
+                            <div class="row">
+                                <div class="col-4">
+                                    <input type="date" class="form-control " placeholder="canlender" data-val="true"
+                                           data-val-required="The Date field is required." id="Date" name="Date"
+                                           value="">
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" aria-label="Default select example" id="Time" name="Time" type="time">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            <h2>how longer do you need your cleaner to stay? </h2>
+                            <div class="col-4">
+                                <select class="form-select" aria-label="Default select example" data-val="true"
+                                        data-val-required="The Duration field is required." id="Duration"
+                                        name="Duration">
+
+                                    <option selected="" value="1">1.0 hrs</option>
+                                    <option value="2">2.0 hrs</option>
+                                    <option value="3">3.0 hrs</option>
+                                    <option value="4">4.0 hrs</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h2>Extra services</h2>
+                    <div class="container extra_services">
+                        <div class="row text-center">
+                            <div class="col-sm">
+                                <input type="checkbox" id="InsideCabinat" class="hidden"
+                                       onclick="extrabtnclick(id,3)" data-val="true"
+                                       data-val-required="The Cabinet field is required." name="extra.Cabinet"
+                                       value="true">
+                                <label for="InsideCabinat" class="btn">
+                                    <img src="~/image/3.png" id="InsideCabinatImg"
+                                         alt="...">
+                                </label>
+                                <p class="service">Inside cabinets</p>
+
+
+                            </div>
+                            <div class="col-sm">
+                                <input type="checkbox" id="InsideFridge" class="hidden"
+                                       onclick="extrabtnclick(id,5)" data-val="true"
+                                       data-val-required="The Fridge field is required." name="extra.Fridge"
+                                       value="true">
+                                <label for="InsideFridge" class="btn">
+                                    <img src="~/image/5.png" id="InsideFridgeImg"
+                                         alt="...">
+                                </label>
+
+                                <p class="service">Inside fridge</p>
+
+                            </div>
+                            <div class="col-sm">
+                                <input type="checkbox" id="InsideOven" class="hidden" onclick="extrabtnclick(id,4)"
+                                       data-val="true" data-val-required="The Oven field is required."
+                                       name="extra.Oven" value="true">
+                                <label for="InsideOven" class="btn">
+                                    <img src="~/image/4.png" id="InsideOvenImg"
+                                         alt="...">
+                                </label>
+
+                                <p class="service">Inside oven</p>
+
+                            </div>
+                            <div class="col-sm">
+                                <input type="checkbox" id="InsideLaundry" class="hidden"
+                                       onclick="extrabtnclick(id,2)" data-val="true"
+                                       data-val-required="The laundry field is required." name="extra.laundry"
+                                       value="true">
+                                <label for="InsideLaundry" class="btn">
+                                    <img src="~/image/2.png" id="InsideLaundryImg"
+                                         alt="...">
+                                </label>
+
+                                <p class="service">Laundry wash &amp; dry</p>
+
+                            </div>
+                            <div class="col-sm">
+                                <input type="checkbox" id="InsideWindow" class="hidden"
+                                       onclick="extrabtnclick(id,1)" data-val="true"
+                                       data-val-required="The window field is required." name="extra.window"
+                                       value="true">
+                                <label for="InsideWindow" class="btn">
+                                    <img src="~/image/1.png" id="InsideWindowImg"
+                                         alt="...">
+                                </label>
+                                <p class="service">Interior windows</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="comments">
+                        <label for="comments" class="form-label">Comments</label>
+                        <textarea class="form-control" id="comments" rows="3" name="Comments"></textarea>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" data-val="true"
+                               data-val-required="The havePet field is required." name="havePet" value="true">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            I have pets at home
+                        </label>
+
+                    </div>
+                    <hr>
+                    <button class="continue" type="button" onclick="scheduleSubmit()">
+                        Continue
+                    </button>
+                </div>
+                <input name="extra.Cabinet" type="hidden" value="false">
+                <input name="extra.Fridge" type="hidden" value="false">
+                <input name="extra.Oven" type="hidden" value="false">
+                <input name="extra.laundry" type="hidden" value="false">
+                <input name="extra.window" type="hidden" value="false">
+                <input name="havePet" type="hidden" value="false">
+            </form>
+            <form id="YourData">
+                <div id="your_details" class="tabcontent" style="display: none;">
+
+                    <div id="address">
+                        <p>Please select your addreee:</p>
+                        <button class="btn add_address" id="add_address" onclick="toggleText()">
+                            + Add New
+                            Address
+                        </button>
+                    </div>
+
+
+
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="streetname" class="form-label">Street name</label>
+                            <input type="text" class="form-control" name="streetname" placeholder="Street name">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="housenumber" class="form-label">House number</label>
+                            <input type="text" class="form-control" name="housenumber" placeholder="House number">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="postalcode" class="form-label">Postal Code</label>
+                            <input type="text" class="form-control" name="postalcode" placeholder="Postal Code">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" name="city" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="phonenumber" class="form-label">Phone number</label>
+                            <div class="input-group">
+                                <div class="input-group-text">+49</div>
+                                <input type="text" class="form-control" name="phonenumber"
+                                       placeholder="Mobile Number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn save">Save</button>
+                        <button type="reset" class="btn cancel">Cancel</button>
+                    </div>
+
+                </div>
+            </form>
+            <form id="Payment">
+                <div id="make_payment" class="tabcontent" style="display: none;">
+                    <div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <span><i class="glyphicon glyphicon-lock"></i></span> Secure
+                                Payment
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Card Type:</strong></div>
+                                    <div class="col-md-12">
+                                        <select id="CreditCardType" name="CreditCardType" class="form-control">
+                                            <option value="5">Visa</option>
+                                            <option value="6">MasterCard</option>
+                                            <option value="7">American Express</option>
+                                            <option value="8">Discover</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Credit Card Number:</strong></div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="car_number"
+                                               value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Card CVV:</strong></div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="car_code"
+                                               value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <strong>Expiration Date</strong>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" name="">
+                                            <option value="">Month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" name="">
+                                            <option value="">Year</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span>Pay secure using your credit card.</span>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <ul class="cards">
+                                            <li class="visa hand">Visa</li>
+                                            <li class="mastercard hand">MasterCard</li>
+                                            <li class="amex hand">Amex</li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <button type="submit" class="btn save">Checkout & PAY --></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+
+            <div class="card">
+                <div class="card-header">
+                    Payment Summary
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Date & time <br> Iteams selected</p>
+
+                    <h3 class="card-text">
+                        Duration
+                    </h3>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text">
+                                Basic
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-end">
+                                3 Hrs
+                            </p>
+                        </div>
+                    </div>
+                    <p class="card-text hidden" id="extra3">
+                        Inside cabinets <span class="extratime">30 min</span>
+                    </p>
+                    <p class="card-text hidden" id="extra5">
+                        Inside fridge <span class="extratime"> 30 min </span>
+                    </p>
+                    <p class="card-text hidden" id="extra4">
+                        Inside oven <span class="extratime"> 30 min </span>
+                    </p>
+                    <p class="card-text hidden" id="extra2">
+                        Laundry wash and dry <span class="extratime"> 30 min </span>
+                    </p>
+                    <p class="card-text hidden" id="extra1">
+                        Interior windows <span class="extratime"> 30 min </span>
+                    </p>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text total_time">
+                                Total Service Time
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-end price">
+                                <span id="total_hours">3</span>Hrs
+
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text">
+                                Per cleaning
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-end price">
+                                $ <span id="total_price">1000</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text">
+                                Discount
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-end price">
+                                -$ <span id="discount">100</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text total_payment">
+                                Total Payment
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-end total_price">
+                                $ <span id="priceAfterDiscount">900</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text">
+                                Effective Price
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-end effective_price">
+                                $ <span id="priceAfterPromo">900</span>
+                            </p>
+                        </div>
+                    </div>
+                    <p class="card-text saving">*You will save $100 according to §35a EStG.</p>
+                </div>
+                <div class="card-footer">
+                    <img src="image/smiley.png" alt=".."> See what is always included
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/js/booking.js"></script>
