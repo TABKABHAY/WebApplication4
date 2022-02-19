@@ -269,3 +269,21 @@
         /* padding-left: 4px; */
         /* opacity: 1; */
     }
+
+@media (max-width:900px) 
+{
+    .im1 {
+        padding: 10px;
+        text-align: center;
+        /* align-items: center; */
+        /* height: 100%; */
+         width: 100%;
+        /* padding: 10px; */
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* align-items: center; */
+        /* flex-wrap: wrap; */
+    }
+
+
+}
