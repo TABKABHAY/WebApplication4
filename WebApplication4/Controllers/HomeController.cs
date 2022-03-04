@@ -161,5 +161,25 @@ namespace WebApplication4.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateForZipcode(User zc)
+        {
+            var verify = _auc.Zipcodes.FirstOrDefault(x => x.ZipcodeValue.Equals(zc.ZipCode));
+            if (verify != null)
+            {
+                zc.UserId = 0;
+                HttpContext.Session.SetString("zipcode", zc.ZipCode);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _auc.Add(zc);
+                _auc.SaveChanges();
+                ViewBag.Message = "UserName or password is wrong";
+                return RedirectToAction("About", "Home");
+            }
+        }
+
     }
 }

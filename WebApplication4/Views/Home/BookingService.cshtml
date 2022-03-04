@@ -1,8 +1,10 @@
-﻿@{
+﻿@model WebApplication4.Zipcode;
+
+@{
     ViewData["Title"] = "BookingService";
 }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="~/css/booking.css">
 <link href="~/image/">
 <link href="~/js/booking.js" />
@@ -25,23 +27,21 @@
                 </li>
             </ul>
 
-            <form id="ZipCode">
+            <form id="ZipCode" method="post" asp-controller="Home" asp-action="CreateForzipcode">
                 <div id="setup_service" class="tabcontent" style="display: none;">
                     <h2>Enter Your Postal code</h2>
                     <row>
 
-                        <input type="text" id="postalcode" placeholder="Enter Your Postal code" data-val="true"
+                        <input type="text" id="postalcode" placeholder="Enter Your Postal code" asp-for="ZipcodeValue" data-val="true"
                                data-val-length="Please Enter Valid Postal Code" data-val-length-max="6"
-                               data-val-required="The postalcode field is required." maxlength="6" name="postalcode"
-                               value="">
+                               data-val-required="The postalcode field is required." maxlength="6" name="postalcode">
                         <span class="formwarning field-validation-valid" data-valmsg-for="postalcode"
                               data-valmsg-replace="true"></span>
-
-                        <button type="button" class="continue" onclick="postalSubmit()">Check Availability</button>
+                        <input type="submit" class="continue" value="Check Availability">
                     </row>
                 </div>
             </form>
-            <form id="TimeSchedule">
+            <form id="TimeSchedule" method="post" asp-controller="Home" asp-action="CreateForTimeSchedile">
                 <div id="schedule" class="tabcontent schedule" style="display:none;">
 
 
@@ -170,7 +170,7 @@
                 <input name="extra.window" type="hidden" value="false">
                 <input name="havePet" type="hidden" value="false">
             </form>
-            <form id="YourData">
+            <form id="YourData" method="post" asp-controller="Home" asp-action="CreateForYourData">
                 <div id="your_details" class="tabcontent" style="display: none;">
 
                     <div id="address">
@@ -221,7 +221,7 @@
 
                 </div>
             </form>
-            <form id="Payment">
+            <form id="Payment" method="post" asp-controller="Home" asp-action="CreateForPayment">
                 <div id="make_payment" class="tabcontent" style="display: none;">
                     <div>
                         <div class="panel panel-info">

@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Customer Signup";
+    
+}
+@model WebApplication4.User
+
+<br/><br/>  <br/>
+<p class="contact-form-title">
+    Create an account
+
+  </p>
+  <br />
+
+  <div class="container-fluid  contact-form-container">
+
+      <div class="@TempData["add"] alert-danger alert-dismissible fade" role="alert" id="loginFailAlert">
+                    @TempData["msg"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+    <form asp-controller="UserManagement" asp-action="CustomerSignUp" method='post' >
+      <div class="row">
+        <div class=" col-sm-6">
+            <span asp-validation-for="FirstName" class="formwarning"></span>
+          <input  asp-for="FirstName"  type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class=" col-sm-6">
+            <span asp-validation-for="LastName" class="formwarning"></span>
+          <input type="text"  asp-for="LastName" class="form-control" placeholder="Last name">
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-sm-6">
+             <span asp-validation-for="Email" class="formwarning"></span>
+          <input type="text" asp-for="Email" class="form-control" placeholder="Email address">
+        </div>
+        <div class=" col-sm-6">
+            <span asp-validation-for="LastName" class="formwarning"></span>
+          <div class="input-group mb-3">
+               
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">+91</span>
+            </div>
+            <input type="text" asp-for="Mobile" class="form-control" placeholder="Mobile number">
+          </div>
+
+        </div>
+      </div>
+
+     
+   
+
+     <div class="row">
+        <div class=" col-sm-6">
+            <span asp-validation-for="Password" class="formwarning"></span>
+          <input type="password" asp-for="Password" class="form-control" placeholder="Password">
+        </div>
+        <div class=" col-sm-6">
+            <span asp-validation-for="LastName" class="formwarning"></span>
+          <input type="password" asp-for="Password" class="form-control" placeholder="Confirm Password">
+        </div>
+      </div>
+      <br />
+
+       <div class="form-check" style="text-align:left">
+          <input type="checkbox" class="form-check-input" id="">
+          <label class="form-check-label" for="exampleCheck1" >I have read the privacy policy</label>
+        </div>
+     
+        <br />
+         <Button type="submit" class="nav-link faq-nav-link  faq-nav-link-border mx-auto">Register</Button>
+
+    </form>
+
+  </div> <br><br>
+
