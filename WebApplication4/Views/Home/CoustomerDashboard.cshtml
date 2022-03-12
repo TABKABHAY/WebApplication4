@@ -1,0 +1,1112 @@
+﻿<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!--Custome Css-->
+
+
+    <link rel="stylesheet" href="/css/customerDashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!--JS-->
+    <script src="/js/faq.js"></script>
+
+
+
+
+
+    <title></title>
+</head>
+<body>
+
+    <!--nav bar-->
+    <div style="
+    height: 65px;"></div>
+
+
+
+
+
+
+
+
+
+
+    <h1>Welcome <span> Abhay </span></h1>
+
+    <section class="main_service clearfix">
+
+        <!-- tab -->
+
+
+        <div class="tab" id="verticaltab">
+
+
+            <button class="tablinks active" onclick="upcoming_service(event, 'dashboard')" id="dashboardTabBtn">Dashboard</button>
+
+
+            <button class="tablinks" onclick="upcoming_service(event, 'service_history')" id="serviceHistroyTabBtn">
+
+
+                Service
+                History
+
+
+            </button>
+            <button class="tablinks" onclick="upcoming_service(event, 'service_schedule')" id="serviceScheduleTabBtn">
+
+
+                Service
+                Schedule
+
+
+            </button>
+
+            <button class="tablinks" onclick="upcoming_service(event, 'favourite_pros')" id="favouriteProsTabBtn"> Favourite Pros </button>
+            <button class="tablinks" onclick="upcoming_service(event, 'invoices')" id="invoiceTabBtn">Invoices</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'notification')" id="notificationTabBtn"> Notifications</button>
+            <button class="tablinks d-none" onclick="upcoming_service(event, 'customer_Settings')" id="SettingsTabBtn"> Setting </button>
+
+
+        </div>
+
+        <!-- table -->
+
+
+
+
+        <div id="dashboard" class="tab-contant" style="display: block;">
+            <div class="clearfix">
+                <div class="d-flex justify-content-between">
+                    <p class="alignleft "> Customer Service Request </p>
+
+                    <a href="/Customer/BookService"> <button class="alignright ">Add new request</button></a>
+
+                </div>
+                <div id="dashbordTable_wrapper" class="dataTables_wrapper no-footer">
+                    <table id="dashbordTable" class="table dataTable no-footer dtr-inline" aria-describedby="dashbordTable_info" style="width: 800px;">
+                        <thead class="table-light">
+                            <tr class="text-center"><th scope="col" style="width: 109px;" class="sorting sorting_asc" tabindex="0" aria-controls="dashbordTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" Service ID : activate to sort column descending"> Service ID <img src="/image/sort.png"></th><th scope="col" style="width: 132px;" class="sorting" tabindex="0" aria-controls="dashbordTable" rowspan="1" colspan="1" aria-label=" Service Date  : activate to sort column ascending"> Service Date <img src="/image/sort.png"> </th><th scope="col" style="width: 195px;" class="sorting" tabindex="0" aria-controls="dashbordTable" rowspan="1" colspan="1" aria-label=" Service Provider  : activate to sort column ascending"> Service Provider <img src="/image/sort.png"> </th><th scope="col" style="width: 97px;" class="sorting" tabindex="0" aria-controls="dashbordTable" rowspan="1" colspan="1" aria-label=" Payment  : activate to sort column ascending"> Payment <img src="/image/sort.png"> </th><th scope="col" style="width: 108px; text-align: end; padding-right: 0px;" class="sorting_disabled" rowspan="1" colspan="1" aria-label=" Acti"> Acti</th><th scope="col" style="width: 79px; text-align: start; padding-left: 0px;" "=" " class="sorting" tabindex="0" aria-controls="dashbordTable" rowspan="1" colspan="1" aria-label="on: activate to sort column ascending">on</th></tr>
+                        </thead>
+                        <tbody>
+
+
+
+
+                            <tr data-value="71" class="text-center odd">
+                                <td data-label="Service ID" class="dtr-control sorting_1" tabindex="0">
+
+                                    <p>71</p>
+
+                                </td>
+                                <td data-label="Service Date">
+                                    <div> <img src="/image/calendar.png" alt="calender"> 16/03/2022 </div>
+                                    <p class="service-time"> 06:00  - 10:00  </p>
+
+                                </td>
+
+                                <td data-label="Service Provider" class="clearfix">
+                                    <div class="cap-icon"> <img src="/image/" class="spavtar" alt=".."> </div><div style="font-weight:400" class="text-start"> ajex mex</div>
+                                    <div>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:silver;"></i>
+                                        <i class="fa fa-star " style="color:silver;"></i>
+                                        <span>3.7</span>
+                                    </div>
+                                </td>
+
+
+                                <td data-label="Payment">
+                                    <p class="price">€ 100.00 </p>
+                                </td>
+
+
+                                <td data-label="Reschedule"> <button class="customerReschedule" style="float:right" data-bs-toggle="modal" data-bs-target="#rescheduleModelServiceRequest" value="71">Reschedule</button></td>
+                                <td data-label="Cancel"><button class="customerCancel" data-bs-toggle="modal" data-bs-target="#deleteModelServiceRequest" value="71">Cancel</button></td>
+                            </tr>
+                            <tr data-value="74" class="text-center even">
+                                <td data-label="Service ID" class="dtr-control sorting_1" tabindex="0">
+
+                                    <p>74</p>
+
+                                </td>
+                                <td data-label="Service Date">
+                                    <div> <img src="/image/calendar.png" alt="calender"> 14/03/2022 </div>
+                                    <p class="service-time"> 08:30  - 12:30  </p>
+
+                                </td>
+
+                                <td data-label="Service Provider" class="clearfix">
+                                    <div class="cap-icon"> <img src="/image/" class="spavtar" alt=".."> </div><div style="font-weight:400" class="text-start"> ajex mex</div>
+                                    <div>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:silver;"></i>
+                                        <i class="fa fa-star " style="color:silver;"></i>
+                                        <span>3.7</span>
+                                    </div>
+                                </td>
+
+
+                                <td data-label="Payment">
+                                    <p class="price">€ 100.00 </p>
+                                </td>
+
+
+                                <td data-label="Reschedule"> <button class="customerReschedule" style="float:right" data-bs-toggle="modal" data-bs-target="#rescheduleModelServiceRequest" value="74">Reschedule</button></td>
+                                <td data-label="Cancel"><button class="customerCancel" data-bs-toggle="modal" data-bs-target="#deleteModelServiceRequest" value="74">Cancel</button></td>
+                            </tr>
+                        </tbody>
+                    </table><div class="pagenum d-flex justify-content-between "><div class="pagenum-left"><div class="dataTables_length" id="dashbordTable_length"><label>Show<select name="dashbordTable_length" aria-controls="dashbordTable" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>Entries</label></div><div class="dataTables_info" id="dashbordTable_info" role="status" aria-live="polite">Total Records : 2</div></div><div class="pagenum-right"><div class="dataTables_paginate paging_full_numbers" id="dashbordTable_paginate"><a class="paginate_button first disabled" aria-controls="dashbordTable" data-dt-idx="0" tabindex="-1" id="dashbordTable_first"><img src="/image/pagination-first.png" alt="first"></a><a class="paginate_button previous disabled" aria-controls="dashbordTable" data-dt-idx="1" tabindex="-1" id="dashbordTable_previous"><img src="/image/pagination-left.png" alt="previous"></a><span><a class="paginate_button current" aria-controls="dashbordTable" data-dt-idx="2" tabindex="0">1</a></span><a class="paginate_button next disabled" aria-controls="dashbordTable" data-dt-idx="3" tabindex="-1" id="dashbordTable_next"><img src="/image/pagination-left.png" alt="next" style="transform: rotate(180deg)"></a><a class="paginate_button last disabled" aria-controls="dashbordTable" data-dt-idx="4" tabindex="-1" id="dashbordTable_last"><img src="/image/pagination-first.png" alt="first" style="transform: rotate(180deg) "></a></div></div></div>
+                </div>
+
+
+
+
+
+
+                <div class="card mobileview clearfix mx-auto" style="width:100%; padding:0% 5% 0% 5%; ">
+                    <div class="card-body" data-value="71">
+                        <h6 class="d-inline pe-2">Service Id : </h6> 71
+                        <hr>
+                        <span>
+
+
+                            <img src="/image/calendar.png" alt="calender"><h6 class="d-inline pe-2 "> <span class="d-none d-sm-block">Service</span>  Date:</h6><span class="date mb-0">16/03/2022</span><br>
+                            <img src="/image/clock.png" alt="calender"><h6 class="pe-2 d-inline  "><span class="d-none d-sm-block">Service</span> Time:</h6> 06:00  - 10:00
+
+
+                        </span>
+                        <hr>
+                        <h6 class="pe-2 ">Service Provider Name:</h6>
+                        <div class="cap-icon">  <img src="/image/" alt="..">   </div>
+                        ajex mex                                <div>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:silver;"></i>
+                            <i class="fa fa-star " style="color:silver;"></i>
+                            <span>3.7</span>
+                        </div>
+                        <hr>
+
+
+                        <p class="price"></p><h6 class="d-inline pe-2">Price:</h6> € 100.00 <p></p>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+                            <button class="customerReschedule" value="71" data-bs-toggle="modal" data-bs-target="#rescheduleModelServiceRequest">Reschedule</button>
+
+                            <button class="customerCancel" value="71" data-bs-toggle="modal" data-bs-target="#deleteModelServiceRequest">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="card-body" data-value="74">
+                        <h6 class="d-inline pe-2">Service Id : </h6> 74
+                        <hr>
+                        <span>
+
+
+                            <img src="/image/calendar.png" alt="calender"><h6 class="d-inline pe-2 "> <span class="d-none d-sm-block">Service</span>  Date:</h6><span class="date mb-0">14/03/2022</span><br>
+                            <img src="/image/clock.png" alt="calender"><h6 class="pe-2 d-inline  "><span class="d-none d-sm-block">Service</span> Time:</h6> 08:30  - 12:30
+
+
+                        </span>
+                        <hr>
+                        <h6 class="pe-2 ">Service Provider Name:</h6>
+                        <div class="cap-icon">  <img src="/image/" alt="..">   </div>
+                        ajex mex                                <div>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:silver;"></i>
+                            <i class="fa fa-star " style="color:silver;"></i>
+                            <span>3.7</span>
+                        </div>
+                        <hr>
+
+
+                        <p class="price"></p><h6 class="d-inline pe-2">Price:</h6> € 100.00 <p></p>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+                            <button class="customerReschedule" value="74" data-bs-toggle="modal" data-bs-target="#rescheduleModelServiceRequest">Reschedule</button>
+
+                            <button class="customerCancel" value="74" data-bs-toggle="modal" data-bs-target="#deleteModelServiceRequest">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <div class="modal" tabindex="-1" id="deleteModelServiceRequest">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <input type="hidden" id="CancelRequestId" name="CancelRequestId">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cancel Service Request</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="comment" class="form-label">Why you want to cancel the service request?</label>
+                        <textarea class="form-control" id="cancelReason" rows="3"></textarea>
+                        <div class="text-center">
+                            <button class="customerCancel" type="button" data-bs-dismiss="modal" id="CancelRequestBtn">Cancel Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button id="serviceReqdetailsbtn" data-bs-toggle="modal" data-bs-target="#detailsModelServiceRequest" class="d-none">details</button>
+
+
+        <div class="modal" tabindex="-1" id="detailsModelServiceRequest">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-start">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Service Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body float-start">
+                        <h4 id="CDSDDateTime">05/10/2021 08:00 - 11:30</h4>
+                        <p>Duration: <span id="CDSDDuration"></span> </p>
+                        <hr>
+                        <p>Service id: <span id="CDSDId"></span></p>
+                        <div class="row"> <p class="col-2 d-inline">Extras: </p> <div class="col-10 d-inline" id="CDSDExtra"></div></div>
+
+                        <p>Net Amount: <span id="CDSDAmount">8750 €</span> </p>
+                        <p id="CDSDStatus"></p>
+                        <hr>
+                        <p>Service Address:<span id="CDSDAddress"></span></p>
+                        <p>Billing Address: <span>same as cleaninng address</span></p>
+                        <p>phone:<span id="CDSDPhone"></span></p>
+                        <p>Email:<span id="CDSDEmail"> </span></p>
+                        <hr>
+
+                        <p>Comments <span id="CDSDComment"></span></p>
+                        <span id="customerdashboardbtn">
+                            <hr>
+
+
+
+                            <div class="text-center  d-flex justify-content-around">
+                                <button class="customerReschedule" data-bs-toggle="modal" data-bs-target="#rescheduleModelServiceRequest" id="' '">Reschedule</button><button class="customerCancel" data-bs-toggle="modal" data-bs-target="#deleteModelServiceRequest">Cancel</button>
+                            </div>
+
+                        </span>
+                        <span id="customerServiceHistorybtn">
+                            <hr>
+
+
+
+                            <div class="text-center  d-flex justify-content-around">
+                                <button class="rate" data-bs-toggle="modal" data-bs-target="#myRatingModal">Rate </button>
+                            </div>
+
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="modal" tabindex="-1" id="rescheduleModelServiceRequest">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Reschedule Service Request</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Select New Date &amp; Time</p>
+                        <div class="row">
+                            <div class="col-sm-6 col-12"> <input id="selected_date" type="date" value="2022-03-13" placeholder="canlender" min="2022-03-13"></div>
+                            <div class="col-sm-6 col-12">
+                                <input type="hidden" id="updateRequestId" name="updateRequestId">
+                                <select class="form-select" id="selected_time">
+                                    <option selected="" value="08:00:00">8:00 </option>
+                                    <option value="08:30:00">8:30 </option>
+                                    <option value="09:00:00">9:00 </option>
+                                    <option value="09:30:00">9:30 </option>
+                                    <option value="10:00:00">10:00 </option>
+                                    <option value="10:30:00">10:30 </option>
+                                    <option value="11:00:00">11:00 </option>
+                                    <option value="11:30:00">11:30 </option>
+                                    <option value="12:00:00"> 12:00  </option>
+                                    <option value="12:30:00">12:30 </option>
+                                    <option value="13:00:00"> 13:00  </option>
+                                    <option value="13:30:00">13:30 </option>
+                                    <option value="14:00:00"> 14:00  </option>
+                                    <option value="14:30:00">14:30 </option>
+                                    <option value="15:00:00"> 15:00  </option>
+                                    <option value="15:30:00">15:30 </option>
+                                    <option value="16:00:00"> 16:00  </option>
+                                    <option value="16:30:00">16:30 </option>
+                                    <option value="17:00:00"> 17:00  </option>
+                                    <option value="17:30:00">17:30 </option>
+                                    <option value="18:00:00"> 18:00  </option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button id="RescheduleServiceRequest" type="submit" data-bs-dismiss="modal" class="customerReschedule">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="service_history" class="tab-contant" style="display: none;">
+            <div class="clearfix">
+                <div class="d-flex justify-content-between">
+                    <p class="alignleft"> Service History </p>
+                    <button id="export" class="ServiceHistroyExport">Export</button>
+                </div>
+                <div id="ServiceHistoryTable_wrapper" class="dataTables_wrapper no-footer">
+                    <table class="table dataTable no-footer dtr-inline" id="ServiceHistoryTable" aria-describedby="ServiceHistoryTable_info" style="width: 0px;">
+                        <thead class="table-light">
+                            <tr class="text-center"><th scope="col" class="serviceHistoryServiceDetails sorting sorting_asc" tabindex="0" aria-controls="ServiceHistoryTable" rowspan="1" colspan="1" style="width: 0px;" aria-sort="ascending" aria-label=" Service Details : activate to sort column descending"> Service Details <img src="/image/sort.png"></th><th scope="col" class="serviceHistoryServiceProvider sorting" tabindex="0" aria-controls="ServiceHistoryTable" rowspan="1" colspan="1" style="width: 0px;" aria-label=" Service Provider : activate to sort column ascending"> Service Provider <img src="/image/sort.png"></th><th scope="col" class="serviceHistoryServicePayment sorting" tabindex="0" aria-controls="ServiceHistoryTable" rowspan="1" colspan="1" style="width: 0px;" aria-label=" Payment : activate to sort column ascending"> Payment <img src="/image/sort.png"></th><th scope="col" class="serviceHistoryServiceStatus sorting" tabindex="0" aria-controls="ServiceHistoryTable" rowspan="1" colspan="1" style="width: 0px;" aria-label=" Status : activate to sort column ascending"> Status <img src="/image/sort.png"></th><th scope="col" class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label=" Rate SP "> Rate SP </th></tr>
+                        </thead>
+                        <tbody>
+
+
+
+
+                            <tr data-value="70" class="text-center odd">
+                                <td data-label="Service Details" class="dtr-control sorting_1" tabindex="0">
+                                    <div> <img src="/image/calendar.png" alt="calender"> 16/03/2022</div>
+                                    <p class="service-time">08:30  - 12:30  </p>
+
+                                </td>
+
+                                <td data-label="Service Provider" class="clearfix">
+                                </td>
+                                <td data-label="Payment">
+                                    <p class="price">€ 100.00 </p>
+                                </td>
+
+                                <td data-label="Status">
+
+                                    <button disabled="" class="cancelled">cancelled</button>
+
+                                </td>
+                                <td data-label="Rate SP">
+                                    <button class="rateDisabled" disabled="" data-bs-toggle="modal" data-bs-target="#myRatingModal">Rate</button>
+                                </td>
+                            </tr>
+                            <tr data-value="73" class="text-center even">
+                                <td data-label="Service Details" class="dtr-control sorting_1" tabindex="0">
+                                    <div> <img src="/image/calendar.png" alt="calender"> 22/03/2022</div>
+                                    <p class="service-time">08:00  - 12:00  </p>
+
+                                </td>
+
+                                <td data-label="Service Provider" class="clearfix">
+                                </td>
+                                <td data-label="Payment">
+                                    <p class="price">€ 100.00 </p>
+                                </td>
+
+                                <td data-label="Status">
+
+                                    <button disabled="" class="cancelled">cancelled</button>
+
+                                </td>
+                                <td data-label="Rate SP">
+                                    <button class="rateDisabled" disabled="" data-bs-toggle="modal" data-bs-target="#myRatingModal">Rate</button>
+                                </td>
+                            </tr>
+                            <tr data-value="72" class="text-center odd">
+                                <td data-label="Service Details" class="dtr-control sorting_1" tabindex="0">
+                                    <div> <img src="/image/calendar.png" alt="calender"> 31/03/2022</div>
+                                    <p class="service-time">14:00  - 18:00  </p>
+
+                                </td>
+
+                                <td data-label="Service Provider" class="clearfix">
+                                    <div class="cap-icon"> <img src="/image/" alt=".."> </div>
+                                    <div style="font-weight:400" class="text-start"> ajex mex</div>
+                                    <div>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:#ECB91C;"></i>
+                                        <i class="fa fa-star " style="color:silver;"></i>
+                                        <i class="fa fa-star " style="color:silver;"></i>
+                                        <span>3.7</span>
+                                    </div>
+                                </td>
+                                <td data-label="Payment">
+                                    <p class="price">€ 100.00 </p>
+                                </td>
+
+                                <td data-label="Status">
+
+                                    <button disabled="" class="completed">completed</button>
+
+                                </td>
+                                <td data-label="Rate SP">
+                                    <button class="rateactive" data-bs-toggle="modal" data-bs-target="#myRatingModal">Rate</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table><div class="pagenum d-flex justify-content-between "><div class="pagenum-left"><div class="dataTables_length" id="ServiceHistoryTable_length"><label>Show<select name="ServiceHistoryTable_length" aria-controls="ServiceHistoryTable" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>Entries</label></div><div class="dataTables_info" id="ServiceHistoryTable_info" role="status" aria-live="polite">Total Records : 3</div></div><div class="pagenum-right"><div class="dataTables_paginate paging_full_numbers" id="ServiceHistoryTable_paginate"><a class="paginate_button first disabled" aria-controls="ServiceHistoryTable" data-dt-idx="0" tabindex="-1" id="ServiceHistoryTable_first"><img src="/image/pagination-first.png" alt="first"></a><a class="paginate_button previous disabled" aria-controls="ServiceHistoryTable" data-dt-idx="1" tabindex="-1" id="ServiceHistoryTable_previous"><img src="/image/pagination-left.png" alt="previous"></a><span><a class="paginate_button current" aria-controls="ServiceHistoryTable" data-dt-idx="2" tabindex="0">1</a></span><a class="paginate_button next disabled" aria-controls="ServiceHistoryTable" data-dt-idx="3" tabindex="-1" id="ServiceHistoryTable_next"><img src="/image/pagination-left.png" alt="next" style="transform: rotate(180deg)"></a><a class="paginate_button last disabled" aria-controls="ServiceHistoryTable" data-dt-idx="4" tabindex="-1" id="ServiceHistoryTable_last"><img src="/image/pagination-first.png" alt="first" style="transform: rotate(180deg) "></a></div></div></div>
+                </div>
+
+                <div class="card mobileview clearfix mx-auto" style="width:100%; padding:0% 5% 0% 5%; ">
+
+
+                    <div class="card-body" data-value="70">
+
+                        <span>
+
+
+                            <img src="/image/calendar.png" alt="calender"><h6 class="d-inline pe-2 "> <span class="d-none d-sm-inline-block">Service</span>  Date:</h6><span class="date mb-0">16/03/2022</span><br>
+                            <img src="/image/clock.png" alt="calender"><h6 class="pe-2 d-inline  "><span class="d-none d-sm-inline-block">Service</span> Time:</h6> 08:30  - 12:30
+
+
+                        </span>
+                        <hr>
+
+
+                        <p class="price"></p><h6 class="d-inline pe-2">Price:</h6> € 100.00 <p></p>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+
+                            <button disabled="" class="cancelled">cancelled</button>
+                            <button class="rateDisabled" data-bs-toggle="modal" data-bs-target="#myRatingModal" disabled="">Rate SP</button>
+
+                        </div>
+                    </div>
+                    <div class="card-body" data-value="72">
+
+                        <span>
+
+
+                            <img src="/image/calendar.png" alt="calender"><h6 class="d-inline pe-2 "> <span class="d-none d-sm-inline-block">Service</span>  Date:</h6><span class="date mb-0">31/03/2022</span><br>
+                            <img src="/image/clock.png" alt="calender"><h6 class="pe-2 d-inline  "><span class="d-none d-sm-inline-block">Service</span> Time:</h6> 14:00  - 18:00
+
+
+                        </span>
+                        <hr>
+                        <h6 class="pe-2 ">Service Provider Name:</h6>
+                        <div class="cap-icon">  <img src="/image/" alt="..">   </div>
+                        ajex mex                                <div>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:#ECB91C;"></i>
+                            <i class="fa fa-star " style="color:silver;"></i>
+                            <i class="fa fa-star " style="color:silver;"></i>
+                            <span>3.7</span>
+
+                        </div>
+                        <hr>
+
+
+                        <p class="price"></p><h6 class="d-inline pe-2">Price:</h6> € 100.00 <p></p>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+
+                            <button disabled="" class="completed">completed</button>
+                            <button class="rateactive" data-bs-toggle="modal" data-bs-target="#myRatingModal">Rate SP</button>
+
+                        </div>
+                    </div>
+                    <div class="card-body" data-value="73">
+
+                        <span>
+
+
+                            <img src="/image/calendar.png" alt="calender"><h6 class="d-inline pe-2 "> <span class="d-none d-sm-inline-block">Service</span>  Date:</h6><span class="date mb-0">22/03/2022</span><br>
+                            <img src="/image/clock.png" alt="calender"><h6 class="pe-2 d-inline  "><span class="d-none d-sm-inline-block">Service</span> Time:</h6> 08:00  - 12:00
+
+
+                        </span>
+                        <hr>
+
+
+                        <p class="price"></p><h6 class="d-inline pe-2">Price:</h6> € 100.00 <p></p>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+
+                            <button disabled="" class="cancelled">cancelled</button>
+                            <button class="rateDisabled" data-bs-toggle="modal" data-bs-target="#myRatingModal" disabled="">Rate SP</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <!-- rate model  -->
+
+        <div class="modal" id="myRatingModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" style="max-width:500px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="show_rating_model" id="show_rating_model">
+
+                            <div class="row ms-2">
+
+                                <div class="col cap-icon"><img src="/image/cap.png" alt=".."></div>
+                                <div class="col ">
+                                    <div class="row service-provider-ratingmodel ps-2" style="width: 200px;">  </div>
+                                    <div class="star-ratingmodel text-start">
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <h4 class="rateservicepro">
+                                Rate Your Service Provider
+                            </h4>
+                            <hr class="reschedulehr">
+
+                            <div class="ontimearrival starratings ratingfortimearrival row ml-1">
+                                <p class="mr-2 ratingtxt">On Time Arrival</p>
+
+                                <span class="ratings1s ">
+                                    <i class="fa fa-star " id="ontime1" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="ontime2" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="ontime3" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="ontime4" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="ontime5" style="color: silver;"></i>
+                                    <span class="infomsg"></span>
+                                </span>
+                            </div>
+
+                            <div class="ontimearrival starratings ratingforfriendly row ml-1">
+                                <p class="mr-2 ratingtxt">Friendly</p>
+
+                                <span class="ratings2 ">
+                                    <i class="fa fa-star " id="friendly1" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="friendly2" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="friendly3" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="friendly4" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="friendly5" style="color: silver;"></i>
+                                    <span class="friendlymsg"></span>
+                                </span>
+                            </div>
+
+                            <div class="ontimearrival starratings ratingforquality row ml-1">
+                                <p class="mr-2 ratingtxt">Quality Of Service</p>
+
+                                <span class="ratings3 ">
+                                    <i class="fa fa-star " id="quality1" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="quality2" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="quality3" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="quality4" style="color: silver;"></i>
+                                    <i class="fa fa-star " id="quality5" style="color: silver;"></i>
+                                    <span class="qualitymsg"></span>
+
+                                </span>
+                            </div>
+
+                            <div class="form-group givefeedback">
+                                <label for="feedbackcomment">Comments</label>
+                                <textarea class="form-control" id="feedbackcomment" rows="2"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" data-bs-dismiss="modal" class="rate" id="confirm_rating">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div id="customer_Settings" class="tab-contant" style="display: none;">
+            <div>
+                <ul class="nav nav-tabs nav-justified" role="tablist" id="myTab1111">
+                    <li class="nav-item ">
+                        <button class="nav-link active" id="nav-tab1" data-bs-toggle="tab" data-bs-target="#mysetting" role="tab">My Details</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="nav-tab2" data-bs-toggle="tab" data-bs-target="#address" role="tab">My Addresses</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="nav-tab3" data-bs-toggle="tab" data-bs-target="#password_change" role="tab">Change Password</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active " id="mysetting" aria-labelledby="nav-tab1">
+                        <form method="post" class="mt-3 ms-1">
+                            <div class="alert alert-danger d-none mt-3 d-flex justify-content-center" style="max-width:800px" id="mSmyDetailsAlert" role="alert">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <label for="firstname" class="form-label">First name</label>
+                                    <input type="text" class="form-control" id="mSfirstname" name="firstname" placeholder="First name" value="">
+                                </div>
+                                <div class="col-4">
+                                    <label for="lastname" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" id="mSlastname" name="lastname" placeholder="Last name">
+                                </div>
+                                <div class="col-4">
+                                    <label for="emailaddress" class="form-label">E-mail address</label>
+                                    <input type="text" class="form-control" id="mSemailaddress" name="emailaddress" placeholder="E-mail address" disabled="">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <label for="phonenumber" class="form-label">Mobile number</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">+91</div>
+                                        <input type="text" class="form-control" name="phonenumber" placeholder="Mobile Number" maxlength="10" size="10" id="mSphonenumber">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <label for="dateofbirth" class="form-label">date of birth</label>
+                                        <div class="col-4">
+                                            <select class="form-select" id="dobday" name="dateofbirth">
+                                                <option value="00">Day</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <select class="form-select" id="dobmonth" name="monthofbirth">
+                                                <option value="00">Month</option>
+                                                <option value="01">January</option>
+                                                <option value="02">February</option>
+                                                <option value="03">March</option>
+                                                <option value="04">April</option>
+                                                <option value="05">May</option>
+                                                <option value="06">June</option>
+                                                <option value="07">July</option>
+                                                <option value="08">August</option>
+                                                <option value="09">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <select class="form-select" id="dobyear" name="yearofbirth">
+                                                <option value="0000">Year</option>
+                                                <option value="1950">1950</option>
+                                                <option value="1951">1951</option>
+                                                <option value="1952">1952</option>
+                                                <option value="1953">1953</option>
+                                                <option value="1954">1954</option>
+                                                <option value="1955">1955</option>
+                                                <option value="1956">1956</option>
+                                                <option value="1957">1957</option>
+                                                <option value="1958">1958</option>
+                                                <option value="1959">1959</option>
+                                                <option value="1960">1960</option>
+                                                <option value="1961">1961</option>
+                                                <option value="1962">1962</option>
+                                                <option value="1963">1963</option>
+                                                <option value="1964">1964</option>
+                                                <option value="1965">1965</option>
+                                                <option value="1966">1966</option>
+                                                <option value="1967">1967</option>
+                                                <option value="1968">1968</option>
+                                                <option value="1969">1969</option>
+                                                <option value="1970">1970</option>
+                                                <option value="1971">1971</option>
+                                                <option value="1972">1972</option>
+                                                <option value="1973">1973</option>
+                                                <option value="1974">1974</option>
+                                                <option value="1975">1975</option>
+                                                <option value="1976">1976</option>
+                                                <option value="1977">1977</option>
+                                                <option value="1978">1978</option>
+                                                <option value="1979">1979</option>
+                                                <option value="1980">1980</option>
+                                                <option value="1981">1981</option>
+                                                <option value="1982">1982</option>
+                                                <option value="1983">1983</option>
+                                                <option value="1984">1984</option>
+                                                <option value="1985">1985</option>
+                                                <option value="1986">1986</option>
+                                                <option value="1987">1987</option>
+                                                <option value="1988">1988</option>
+                                                <option value="1989">1989</option>
+                                                <option value="1990">1990</option>
+                                                <option value="1991">1991</option>
+                                                <option value="1992">1992</option>
+                                                <option value="1993">1993</option>
+                                                <option value="1994">1994</option>
+                                                <option value="1995">1995</option>
+                                                <option value="1996">1996</option>
+                                                <option value="1997">1997</option>
+                                                <option value="1998">1998</option>
+                                                <option value="1999">1999</option>
+                                                <option value="2000">2000</option>
+                                                <option value="2001">2001</option>
+                                                <option value="2002">2002</option>
+                                                <option value="2003">2003</option>
+                                                <option value="2004">2004</option>
+                                                <option value="2005">2005</option>
+                                                <option value="2006">2006</option>
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2009">2009</option>
+                                                <option value="2010">2010</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-4">
+                                    <select class="form-select" id="languageid" name="languageid">
+                                        <option value="1">English</option>
+                                        <option value="2">Hindi</option>
+                                        <option value="3">Gujarati</option>
+                                        <option value="4">French</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <button type="button" class="blue_button" id="CSSaveDetails"> Save</button>
+                            </div>
+                            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ep2B1CZsAxGjeyQKtlsxLpx2btl5IV3ceyesJvFD5_ZLfQUFG6AKaZfUYdvA4KeLdHDdZvp47tx6SqvGqr0qWU9kC4lU7sYmAXjc0Gjoso4KjFrH9PoOV9GE-iKL0Qm-dNVri6AjESdx0KcwF2Htf4">
+                        </form>
+
+                    </div>
+
+
+                    <div class="tab-pane fade" id="address" aria-labelledby="nav-tab2">
+                        <div class="address" id="">
+                            <table class="table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Addresses</th>
+                                        <th scope="col"> Actions</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="alladdress"><tr data-value="20"><td><p><strong> Address: </strong>Ahmedabad, 21, Ahmedabad - 382424</p><p><strong>Phone number: </strong>6565656565</p></td><td class="myAddressBtns"><button class="myAddressButton myAddressEditBtn" data-value="20"><img src="/image/edit.jpg">  </button> <button class="myAddressButton myAddressDeleteBtn" data-value="20"> <img src="/image/deleteiconadd.png" class="deleteiconimg"> </button> </td> </tr> <tr data-value="21"><td><p><strong> Address: </strong>fuji, 44, Ahmedabad - 382424</p><p><strong>Phone number: </strong>9704406633</p></td><td class="myAddressBtns"><button class="myAddressButton myAddressEditBtn" data-value="21"><img src="/image/edit.jpg">  </button> <button class="myAddressButton myAddressDeleteBtn" data-value="21"> <img src="/image/deleteiconadd.png" class="deleteiconimg"> </button> </td> </tr> </tbody>
+                            </table>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#addNewaddressModel" id="addNewaddressbtn">add new address</button>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="password_change" aria-labelledby="nav-tab3">
+
+                        <div class="row">
+                            <form action="post" class="ms-4">
+                                <div class="alert alert-danger d-none mt-3 d-flex justify-content-center" style="max-width:800px" id="mSchangePasswordAlert" role="alert">
+                                </div>
+                                <div class="col-5">
+
+                                    <label for="oldpassword" class="form-label">Old Password</label>
+                                    <input type="password" class="form-control" id="mSoldpassword" placeholder="Old Password">
+                                </div>
+                                <div class="col-5">
+                                    <label for="newpassword" class="form-label">New password</label>
+                                    <input type="password" class="form-control" id="mSnewpassword" placeholder="New Password">
+                                </div>
+                                <div class="col-5">
+                                    <label for="confirmpassword" class="form-label">Confirm password</label>
+                                    <input type="password" class="form-control" id="mSconfirmpassword" placeholder="Confirm Password">
+                                </div>
+                                <div>
+                                    <button type="button" class="blue_button" id="CSChangePassword">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal" tabindex="-1" id="addNewaddressModel">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-start">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="settingsaddressmodeltitel">Add New Address</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body float-start">
+
+                        <form action="" class="address_form">
+                            <div class="alert alert-danger d-none mt-3 d-flex justify-content-center" style="max-width:800px" id="mSaddAddressAlert" role="alert">
+                            </div>
+                            <div class="row mb-3 mt-3">
+
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="housenumber" class="form-label">House number</label>
+                                    <input id="AddressLine1" type="text" class="form-control houseno" name="housenumber" placeholder="House number" required="">
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="streetname" class="form-label">Street name</label>
+                                    <input id="AddressLine2" type="text" class="form-control street" name="streetname" placeholder="Street name" required="">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="postalcode" class="form-label">Postal Code</label>
+                                    <input id="addAddressPostalCode" type="text" class="form-control" name="postalcode" maxlength="6" placeholder="Postal Code" required="">
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="City" class="form-label">City</label>
+                                    <input id="City" type="text" class="form-control addressCity" name="city" placeholder="City" required="">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="phonenumber" class="form-label ">Phone number</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">+49</div>
+                                        <input maxlength="10" id="Mobile" type="text" class="form-control mobilenum" name="phonenumber" placeholder="Mobile Number" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="State" class="form-label">State</label>
+                                    <input id="State" type="text" class="form-control addressCity" name="state" placeholder="State" required="">
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <button type="button" class="btn save" id="addAddressSubmit">Save</button>
+                                <button type="button" class="btn save" id="updateAddressSubmit">Update</button>
+                                <button id="addressCancelBtn" type="reset" class="btn cancel d-none">Cancel</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="MSDeleteAddressModalBtn" data-bs-toggle="modal" data-bs-target="#DeleteAddressModal" class="d-none">delete</button>
+
+        <div class="modal" tabindex="-1" id="DeleteAddressModal">
+            <div class="modal-dialog modal-dialog-centered" style="max-width:500px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Address</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Are you sure to Delete it??</h5>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn cancelBtn" data-bs-dismiss="modal" id="MSDeleteAddress">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- script -->
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/r-2.2.9/rg-1.1.4/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+    <script src="/js/customerDashboard.js"></script>
+
+
+    <!--footer starts-->
+
+
+
+
+    <section class="our-news-letter">
+        <div class="container text-center">
+            <h2>GET OUR NEWSLETTER</h2>
+            <div class="form-row d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="email" style="display: none;">YOUR EMAIL</label>
+                    <input type="text" placeholder="YOUR EMAIL" id="email" class="form-control">
+                </div>
+                <div class="btn-wrapper">
+                    <button class="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid footer-container">
+        <div class="row">
+            <div class="col-sm-3 footer-logo-col">
+                <img src="/image/footer-logo.png" class="img-fluid footer-logo-image">
+
+
+            </div>
+            <div class="col-sm-6 footer-nav-col">
+
+                <a class="footer-nav-link" href="/">HOME</a>
+                <a class="footer-nav-link  " href="/Public/about">ABOUT</a>
+                <a class="footer-nav-link ">TESTIMONIALS</a>
+                <a class="footer-nav-link " href="/Public/faq">FAQ</a>
+                <a class="footer-nav-link ">INSURANCE</a>
+                <a class="footer-nav-link ">IMPRESSUM</a>
+
+
+
+
+            </div>
+            <div class="col-sm-3 footer-social-col">
+
+                <img src="/image/ic-facebook.png" class="img-fluid footer-social-image">
+                <img src="/image/ic-instagram.png" class="img-fluid footer-social-image">
+
+                <hr>
+
+
+
+
+
+            </div>
+        </div>
+
+        <hr style="color: white; margin: 0% 5% 1% 5%">
+        <div>
+            <p class="faq-privacy-text">
+                ©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+            </p>
+        </div>
+        <br>
+
+        <!--footer ends-->
+        <!-- Optional JavaScript; choose one of the two! -->
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    </div>
+
+
+
+
+
+</body>
+</html>
