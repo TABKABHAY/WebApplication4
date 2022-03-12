@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebApplication4.Models;
 
 #nullable disable
 
-namespace WebApplication4
+namespace WebApplication4.data
 {
     public partial class masterContext : DbContext
     {
@@ -21,7 +22,7 @@ namespace WebApplication4
         public virtual DbSet<ContactUs> ContactUs { get; set; }
         public virtual DbSet<ContactUsAttachment> ContactUsAttachments { get; set; }
         public virtual DbSet<FavoriteAndBlocked> FavoriteAndBlockeds { get; set; }
-        public virtual DbSet<Login> Logins { get; set; }
+        public virtual DbSet<Login2> Logins { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
         public virtual DbSet<ServiceRequestAddress> ServiceRequestAddresses { get; set; }
@@ -115,25 +116,6 @@ namespace WebApplication4
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_FavoriteAndBlocked_FavoriteAndBlocked");
             });
-
-            modelBuilder.Entity<Login>(entity =>
-            {
-                entity.ToTable("Login");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("password")
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsFixedLength(true);
-            });
-
             modelBuilder.Entity<Rating>(entity =>
             {
                 entity.ToTable("Rating");

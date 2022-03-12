@@ -1,0 +1,49 @@
+﻿@model WebApplication4.Models.Login2
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/hederfooter.css">
+<div id="id01" class="modal">
+    <div class="modal-content">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                  title="Close Modal">&times</span>
+            <img src="~/image/user1.jpg" alt="Avatar" class="avatar">
+        </div>
+        <form method="post" asp-controller="Home" asp-action="Login2">
+            <div class="container">
+                <label>User NAME</label>
+                <input type="text" asp-for="username" placeholder="Enter Username" required>
+
+                <label>Password</label>
+                <input type="password" asp-for="password" placeholder="Enter Password" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+
+                <input class="btn-primary" type="submit">
+
+            </div>
+        </form>
+        <div>
+            <p>@ViewBag.message</p>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">
+                Cancel
+            </button>
+            <span class="psw">
+                "Forgot"
+                <a onclick="document.getElementById('id02').style.display = 'block';document.getElementById('id01').style.display='none';">Password</a>
+            </span>
+            <p>
+                Don't have an account yet?
+                <a asp-controller="home" asp-action="UserRegisteration">create Account</a>
+            </p>
+        </div>
+    </div>
+</div>

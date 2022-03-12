@@ -16,7 +16,8 @@ using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 using System.Reflection.Metadata;
 using Syncfusion.EJ2.Navigations;
 using Syncfusion.EJ2.Grids;
-
+using Org.BouncyCastle.Crypto.Generators;
+using WebApplication4.data;
 
 namespace WebApplication4.Controllers
 {
@@ -78,26 +79,6 @@ namespace WebApplication4.Controllers
             _auc.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public IActionResult CreateForlogin(Login uc)
-        {
-            var verify = _auc.Logins.FirstOrDefault(x => x.Username.Equals(uc.Username) && x.Password.Equals(uc.Password));
-            if (verify != null)
-            {
-                uc.Id = 0;
-                HttpContext.Session.SetString("Username", uc.Username);
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ViewBag.Message = "UserName or password is wrong";
-                return RedirectToAction("UserRegisteration", "Home");
-            }
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateForProvider(User uc)
@@ -124,7 +105,65 @@ namespace WebApplication4.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         [HttpPost]
-        public IActionResult Creat_for_ForgotPassword(string email)
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Login2(Login2 user)
+        {
+            if (ModelState.IsValid)
+            {
+                string password = db.Users.FirstOrDefault(x => x.Email == user.username).Password;
+
+                if (db.Users.Where(x => x.Email == user.username).Count() > 0)
+                {
+
+                    var U = db.Users.FirstOrDefault(x => x.Email == user.username);
+
+                    Console.WriteLine("1");
+
+                    if (user.remember == true)
+                    {
+                        CookieOptions cookieRemember = new CookieOptions();
+                        cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                        Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                    }
+                    HttpContext.Session.SetInt32("userId", U.UserId);
+
+                    if (U.UserTypeId == 0)
+                    {
+                        return RedirectToAction("CustomerDashboard", "Customer");
+                    }
+                    /* else if (user.UserTypeId == 2)
+                      {
+                          return RedirectToAction("SPUpcomingService", "ServicePro");
+                      }
+                      else if (user.UserTypeId == 3)
+                      {
+                          return RedirectToAction("ServiceRequest", "Admin");
+                      }*/
+
+                    return RedirectToAction("CustomerDashboard", "Customer");
+                }
+                else
+                {
+                    TempData["add"] = "alert show";
+                    TempData["fail"] = "username and password are invalid";
+                    return RedirectToAction("Index", "Public", new { loginFail = "true" });
+
+                }
+            }
+
+            TempData["add"] = "alert show";
+            TempData["fail"] = "username and password are required";
+            return RedirectToAction("Index", "Public", new { loginModal = "true" });
+
+        }
+
+
+
+
+        [HttpPost]
+
+        public IActionResult SendMail(string email)
         {
 
             if (email != null)
@@ -134,7 +173,7 @@ namespace WebApplication4.Controllers
 
                 MimeMessage message = new MimeMessage();
 
-                MailboxAddress from = new MailboxAddress("WebApplication4",
+                MailboxAddress from = new MailboxAddress("Helperland",
                 "ajexmex@gmail.com");
                 message.From.Add(from);
 
@@ -143,12 +182,11 @@ namespace WebApplication4.Controllers
 
                 message.Subject = "Reset Password";
 
-                Random r = new Random();
-                int num = r.Next(100000, 999999);
-
-
                 BodyBuilder bodyBuilder = new BodyBuilder();
-                bodyBuilder.HtmlBody = "<h1>Enter given code and reset password</h1>" + num;
+                bodyBuilder.HtmlBody = "<h1>Reset your password by click below link</h1>" +
+                    "<a href='" + Url.Action("ResetPassword", "UserManagement", new { userId = user.UserId }, "https") + "'>Reset Password</a>";
+
+
                 message.Body = bodyBuilder.ToMessageBody();
 
                 SmtpClient client = new SmtpClient();
@@ -157,11 +195,32 @@ namespace WebApplication4.Controllers
                 client.Send(message);
                 client.Disconnect(true);
                 client.Dispose();
-                return RedirectToAction("Index", "Home", new { mailSended = "true" });
+                return RedirectToAction("Index", "Public", new { mailSended = "true" });
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Public");
         }
         [HttpPost]
+        public IActionResult ResetPassword(ResetPassword rp)
+        {
+            var user = new User() { UserId = rp.userId, Password = rp.password };
+            db.Users.Attach(user);
+            db.Entry(user).Property(x => x.Password).IsModified = true;
+            db.Entry(user).Property(x => x.Password).IsModified = true;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index", "Public", new { loginModal = "true" });
+        }
+
+        public IActionResult logout()
+        {
+            HttpContext.Session.Clear();
+
+            Response.Cookies.Delete("userId");
+            return RedirectToAction("Index", "Public", new { logoutModal = "true" });
+        }
+
+    [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateForZipcode(User zc)
         {

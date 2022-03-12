@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using WebApplication4.Models;
+using WebApplication4.data;
 
 namespace WebApplication4
 {
