@@ -71,6 +71,12 @@ namespace WebApplication4.Controllers
         {
             return View();
         }
+        public IActionResult CoustomerDashboard()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateForContactus(ContactUs ct)

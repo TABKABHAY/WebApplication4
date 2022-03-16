@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication4.Models;
-using WebApplication4.data;
 using WebApplication4.ViewModel;
-
-
+using WebApplication4.data;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Generators;
 
-namespace WebApplication4.Controllers
+namespace webapplication1.Controllers
 {
     public class CustomerController : Controller
     {
@@ -22,294 +20,7 @@ namespace WebApplication4.Controllers
             _db = db;
         }
 
-        public IActionResult CustomerDashboard()
-        {
-
-            var userTypeId = -1;
-            User user = null;
-
-            if (HttpContext.Session.GetInt32("userId") != null)
-            {
-
-                user = _db.Users.Find(HttpContext.Session.GetInt32("userId"));
-                ViewBag.Name = user.FirstName;
-                ViewBag.UserType = user.UserTypeId;
-
-                userTypeId = user.UserTypeId;
-
-
-
-            }
-            else if (Request.Cookies["userId"] != null)
-            {
-                user = _db.Users.FirstOrDefault(x => x.UserId == Convert.ToInt32(Request.Cookies["userId"]));
-                ViewBag.Name = user.FirstName;
-                ViewBag.UserType = user.UserTypeId;
-                userTypeId = user.UserTypeId;
-            }
-            if (userTypeId == 0)
-            {
-                List<CustomerDashboard> dashboard = new List<CustomerDashboard>();
-
-
-
-                //var ServiceTable = _db.ServiceRequests.Where(x => (x.UserId == user.UserId) && (x.Status == 1 || x.Status == 2)).ToList();
-
-                var ServiceTable = _db.ServiceRequests.Where(x => x.UserId == user.UserId).ToList();
-
-                //var ServiceTable = _db.ServiceRequests.Where(x=>x.UserId==user.UserId ).ToList();
-                if (ServiceTable.Any())  /*ServiceTable.Count()>0*/
-                {
-                    foreach (var service in ServiceTable)
-                    {
-
-                        CustomerDashboard dash = new CustomerDashboard();
-                        dash.ServiceRequestId = service.ServiceRequestId;
-                        var StartDate = service.ServiceStartDate.ToString();
-                        //dash.Date = StartDate.Substring(0, 10);
-                        //dash.StartTime = StartDate.Substring(11);
-                        dash.Date = service.ServiceStartDate.ToString("dd/MM/yyyy");
-                        dash.StartTime = service.ServiceStartDate.AddHours(0).ToString("HH:mm ");
-                        var totaltime = (double)(service.ServiceHours + service.ExtraHours);
-                        dash.EndTime = service.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
-                        dash.Status = (int)service.Status;
-                        dash.TotalCost = service.TotalCost;
-
-                        if (service.ServiceProviderId != null)
-                        {
-
-                            User sp = _db.Users.Where(x => x.UserId == service.ServiceProviderId).FirstOrDefault();
-
-                            dash.ServiceProvider = sp.FirstName + " " + sp.LastName;
-                            dash.UserProfilePicture = "/image/" + sp.UserProfilePicture;
-                            decimal rating;
-
-                            if (_db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Count() > 0)
-                            {
-                                rating = _db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Average(x => x.Ratings);
-                            }
-                            else
-                            {
-                                rating = 0;
-                            }
-                            dash.AverageRating = (float)decimal.Round(rating, 1, MidpointRounding.AwayFromZero);
-
-
-                        }
-
-                        dashboard.Add(dash);
-
-                    }
-                }
-
-                return PartialView(dashboard);
-            }
-
-
-            return RedirectToAction("Index", "Public", new { loginFail = "true" });
-
-
-        }
-
-        [HttpPost]
-        public IActionResult RescheduleServiceRequest(CustomerDashboard reschedule)
-        {
-            ServiceRequest rescheduleService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == reschedule.ServiceRequestId);
-
-            Console.WriteLine(reschedule.ServiceRequestId);
-
-            string date = reschedule.Date + " " + reschedule.StartTime;
-            Console.WriteLine(reschedule.Date);
-
-            rescheduleService.ServiceStartDate = DateTime.Parse(date);
-            rescheduleService.ServiceRequestId = reschedule.ServiceRequestId;
-            rescheduleService.ModifiedDate = DateTime.Now;
-
-            var result = _db.ServiceRequests.Update(rescheduleService);
-            _db.SaveChanges();
-
-            if (result != null)
-            {
-                return Ok(Json("true"));
-            }
-
-            return Ok(Json("false"));
-        }
-
-
-
-
-        [HttpPost]
-        public IActionResult CancelServiceRequest(ServiceRequest cancel)
-        {
-
-
-
-            Console.WriteLine(cancel.ServiceRequestId);
-            ServiceRequest cancelService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
-            cancelService.Status = 4;
-            if (cancel.Comments != null)
-            {
-                cancelService.Comments = cancel.Comments;
-            }
-
-            var result = _db.ServiceRequests.Update(cancelService);
-            _db.SaveChanges();
-            if (result != null)
-            {
-                return Ok(Json("true"));
-            }
-
-            return Ok(Json("false"));
-        }
-
-        [HttpGet]
-        public JsonResult DashbordServiceDetails(CustomerDashboard ID)
-        {
-
-            CustomerDashboard Details = new CustomerDashboard();
-
-            ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
-            Details.ServiceRequestId = ID.ServiceRequestId;
-            Details.Date = sr.ServiceStartDate.ToString("dd/MM/yyyy");
-            Details.StartTime = sr.ServiceStartDate.ToString("HH:mm");
-            Details.Duration = (decimal)(sr.ServiceHours + sr.ExtraHours);
-            Details.EndTime = sr.ServiceStartDate.AddHours((double)sr.SubTotal).ToString("HH:mm");
-            Details.TotalCost = sr.TotalCost;
-            Details.Comments = sr.Comments;
-            Details.Status = (int)sr.Status;
-
-            Console.WriteLine("helo");
-            Console.WriteLine(Details.Status);
-            List<ServiceRequestExtra> SRExtra = _db.ServiceRequestExtras.Where(x => x.ServiceRequestId == ID.ServiceRequestId).ToList();
-
-            foreach (ServiceRequestExtra row in SRExtra)
-            {
-                if (row.ServiceExtraId == 1)
-                {
-                    Details.Cabinet = true;
-                }
-                else if (row.ServiceExtraId == 2)
-                {
-                    Details.Oven = true;
-                }
-                else if (row.ServiceExtraId == 3)
-                {
-                    Details.Window = true;
-                }
-                else if (row.ServiceExtraId == 4)
-                {
-                    Details.Fridge = true;
-                }
-                else
-                {
-                    Details.Laundry = true;
-                }
-            }
-
-            ServiceRequestAddress Address = _db.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
-
-            Details.Address = Address.AddressLine1 + ", " + Address.AddressLine2 + ", " + Address.City + " - " + Address.PostalCode;
-
-            Details.PhoneNo = Address.Mobile;
-            Details.Email = Address.Email;
-
-            return new JsonResult(Details);
-        }
-
-        [HttpGet]
-        public JsonResult GetRating(CustomerDashboard ID)
-        {
-            ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
-
-            if (_db.Ratings.Where(x => x.RatingTo == sr.ServiceProviderId).Count() > 0)
-            {
-                decimal avgrating = _db.Ratings.Where(x => x.RatingTo == sr.ServiceProviderId).Average(x => x.Ratings);
-
-
-
-                CustomerDashboard customerDashboard = new CustomerDashboard();
-                customerDashboard.AverageRating = (float)decimal.Round(avgrating, 1, MidpointRounding.AwayFromZero);
-
-                User sp = _db.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
-                customerDashboard.UserProfilePicture = "/images/" + sp.UserProfilePicture;
-                customerDashboard.ServiceProvider = sp.FirstName + " " + sp.LastName;
-
-                return new JsonResult(customerDashboard);
-            }
-            return new JsonResult(null);
-        }
-
-
-        public IActionResult RateServiceProvider(Rating rating)
-        {
-            int? Id = -1;
-            if (HttpContext.Session.GetInt32("userId") != null)
-            {
-                Id = HttpContext.Session.GetInt32("userId");
-            }
-            else if (Request.Cookies["userId"] != null)
-            {
-
-                Id = Convert.ToInt32(Request.Cookies["userId"]);
-            }
-
-            if (Id != null)
-            {
-                if (_db.Ratings.Where(x => x.ServiceRequestId == rating.ServiceRequestId).Count() > 0)
-                {
-                    return Ok(Json("false"));
-                }
-
-
-                rating.RatingDate = DateTime.Now;
-                ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == rating.ServiceRequestId);
-                rating.RatingTo = (int)sr.ServiceProviderId;
-                rating.RatingFrom = (int)Id;
-                Console.WriteLine(rating.Ratings);
-
-                var result = _db.Ratings.Add(rating);
-                _db.SaveChanges();
-
-                if (result != null)
-                {
-                    return Ok(Json("true"));
-                }
-            }
-            return Ok(Json("false"));
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*Book service*/
-
-
-
-
-
-
+ 
         public IActionResult BookService()
         {
             if (HttpContext.Session.GetInt32("userId") != null)
@@ -337,7 +48,6 @@ namespace WebApplication4.Controllers
             TempData["fail"] = "Please Login to book service";
             return RedirectToAction("Index", "Public", new { loginFail = "true" });
 
-
         }
 
         [HttpPost]
@@ -351,8 +61,6 @@ namespace WebApplication4.Controllers
 
                 if (list.Count() > 0)
                 {
-
-
                     return Ok(Json("true"));
                 }
                 // TempData["wrongZipCode"] = "Postal code you have entered is not valid.";
@@ -385,7 +93,6 @@ namespace WebApplication4.Controllers
 
 
         }
-
 
         [HttpGet]
         public IActionResult DetailsService(PostalCode obj)
@@ -429,55 +136,32 @@ namespace WebApplication4.Controllers
             return new JsonResult(Addresses);
         }
 
-
+  
         [HttpPost]
-        public IActionResult AddNewAddress(UserAddress useradd)
+        public IActionResult RescheduleServiceRequest(CustomerDashboard reschedule)
         {
+            ServiceRequest rescheduleService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == reschedule.ServiceRequestId);
 
-            if (ModelState.IsValid)
+            Console.WriteLine(reschedule.ServiceRequestId);
+
+            string date = reschedule.Date + " " + reschedule.StartTime;
+            Console.WriteLine(reschedule.Date);
+
+            rescheduleService.ServiceStartDate = DateTime.Parse(date);
+            rescheduleService.ServiceRequestId = reschedule.ServiceRequestId;
+            rescheduleService.ModifiedDate = DateTime.Now;
+
+            var result = _db.ServiceRequests.Update(rescheduleService);
+            _db.SaveChanges();
+
+            if (result != null)
             {
-
-
-                Console.WriteLine("Inside Addnew address 1");
-                int Id = -1;
-
-
-                if (HttpContext.Session.GetInt32("userId") != null)
-                {
-                    Id = (int)HttpContext.Session.GetInt32("userId");
-                }
-                else if (Request.Cookies["userId"] != null)
-                {
-                    Id = int.Parse(Request.Cookies["userId"]);
-
-                }
-                Console.WriteLine("Inside Addnew address 2");
-                Console.WriteLine(Id);
-
-                useradd.UserId = Id;
-                useradd.IsDefault = false;
-                useradd.IsDeleted = false;
-                User user = _db.Users.Where(x => x.UserId == Id).FirstOrDefault();
-                useradd.Email = user.Email;
-                var result = _db.UserAddresses.Add(useradd);
-                Console.WriteLine("Inside Addnew address 3");
-                _db.SaveChanges();
-
-                Console.WriteLine("Inside Addnew address 4");
-                if (result != null)
-                {
-                    return Ok(Json("true"));
-                }
-
-                return Ok(Json("false"));
-
+                return Ok(Json("true"));
             }
-            return View();
+
+            return Ok(Json("false"));
         }
-
-
-
-
+ 
         public ActionResult CompleteBooking(CompleteBooking complete)
         {
             int Id = -1;
@@ -582,6 +266,30 @@ namespace WebApplication4.Controllers
             return Ok(Json("false"));
         }
 
+        [HttpPost]
+        public IActionResult CancelServiceRequest(ServiceRequest cancel)
+        {
+
+
+
+            Console.WriteLine(cancel.ServiceRequestId);
+            ServiceRequest cancelService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
+            cancelService.Status = 4;
+            if (cancel.Comments != null)
+            {
+                cancelService.Comments = cancel.Comments;
+            }
+
+            var result = _db.ServiceRequests.Update(cancelService);
+            _db.SaveChanges();
+            if (result != null)
+            {
+                return Ok(Json("true"));
+            }
+
+            return Ok(Json("false"));
+        }
+  
         [HttpGet]
         public JsonResult GetCustomerData()
         {
@@ -593,6 +301,218 @@ namespace WebApplication4.Controllers
 
             User user = _db.Users.FirstOrDefault(x => x.UserId == Id);
             return new JsonResult(user);
+        }
+
+        public IActionResult CustomerDashboard()
+        {
+
+            var userTypeId = -1;
+            User user = null;
+
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+
+                user = _db.Users.Find(HttpContext.Session.GetInt32("userId"));
+                ViewBag.Name = user.FirstName;
+                ViewBag.UserType = user.UserTypeId;
+
+                userTypeId = user.UserTypeId;
+
+
+
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+                user = _db.Users.FirstOrDefault(x => x.UserId == Convert.ToInt32(Request.Cookies["userId"]));
+                ViewBag.Name = user.FirstName;
+                ViewBag.UserType = user.UserTypeId;
+                userTypeId = user.UserTypeId;
+            }
+            if (userTypeId == 0)
+            {
+                List<CustomerDashboard> dashboard = new List<CustomerDashboard>();
+
+
+
+                //var ServiceTable = _db.ServiceRequests.Where(x => (x.UserId == user.UserId) && (x.Status == 1 || x.Status == 2)).ToList();
+
+                var ServiceTable = _db.ServiceRequests.Where(x => x.UserId == user.UserId).ToList();
+
+                //var ServiceTable = _db.ServiceRequests.Where(x=>x.UserId==user.UserId ).ToList();
+                if (ServiceTable.Any())  /*ServiceTable.Count()>0*/
+                {
+                    foreach (var service in ServiceTable)
+                    {
+
+                        CustomerDashboard dash = new CustomerDashboard();
+                        dash.ServiceRequestId = service.ServiceRequestId;
+                        var StartDate = service.ServiceStartDate.ToString();
+                        //dash.Date = StartDate.Substring(0, 10);
+                        //dash.StartTime = StartDate.Substring(11);
+                        dash.Date = service.ServiceStartDate.ToString("dd/MM/yyyy");
+                        dash.StartTime = service.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                        var totaltime = (double)(service.ServiceHours + service.ExtraHours);
+                        dash.EndTime = service.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                        dash.Status = (int)service.Status;
+                        dash.TotalCost = service.TotalCost;
+
+                        if (service.ServiceProviderId != null)
+                        {
+
+                            User sp = _db.Users.Where(x => x.UserId == service.ServiceProviderId).FirstOrDefault();
+
+                            dash.ServiceProvider = sp.FirstName + " " + sp.LastName;
+                            dash.UserProfilePicture = "/image/" + sp.UserProfilePicture;
+                            decimal rating;
+
+                            if (_db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Count() > 0)
+                            {
+                                rating = _db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Average(x => x.Ratings);
+                            }
+                            else
+                            {
+                                rating = 0;
+                            }
+                            dash.AverageRating = (float)decimal.Round(rating, 1, MidpointRounding.AwayFromZero);
+
+
+                        }
+
+                        dashboard.Add(dash);
+
+                    }
+                }
+
+                return PartialView(dashboard);
+            }
+
+
+            return RedirectToAction("Index", "Public", new { loginFail = "true" });
+
+
+        }
+
+      
+        [HttpGet]
+        public JsonResult DashbordServiceDetails(CustomerDashboard ID)
+        {
+
+            CustomerDashboard Details = new CustomerDashboard();
+
+            ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+            Details.ServiceRequestId = ID.ServiceRequestId;
+            Details.Date = sr.ServiceStartDate.ToString("dd/MM/yyyy");
+            Details.StartTime = sr.ServiceStartDate.ToString("HH:mm");
+            Details.Duration = (decimal)(sr.ServiceHours + sr.ExtraHours);
+            Details.EndTime = sr.ServiceStartDate.AddHours((double)sr.SubTotal).ToString("HH:mm");
+            Details.TotalCost = sr.TotalCost;
+            Details.Comments = sr.Comments;
+            Details.Status = (int)sr.Status;
+
+            Console.WriteLine("helo");
+            Console.WriteLine(Details.Status);
+            List<ServiceRequestExtra> SRExtra = _db.ServiceRequestExtras.Where(x => x.ServiceRequestId == ID.ServiceRequestId).ToList();
+
+            foreach (ServiceRequestExtra row in SRExtra)
+            {
+                if (row.ServiceExtraId == 1)
+                {
+                    Details.Cabinet = true;
+                }
+                else if (row.ServiceExtraId == 2)
+                {
+                    Details.Oven = true;
+                }
+                else if (row.ServiceExtraId == 3)
+                {
+                    Details.Window = true;
+                }
+                else if (row.ServiceExtraId == 4)
+                {
+                    Details.Fridge = true;
+                }
+                else
+                {
+                    Details.Laundry = true;
+                }
+            }
+
+            ServiceRequestAddress Address = _db.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+
+            Details.Address = Address.AddressLine1 + ", " + Address.AddressLine2 + ", " + Address.City + " - " + Address.PostalCode;
+
+            Details.PhoneNo = Address.Mobile;
+            Details.Email = Address.Email;
+
+            return new JsonResult(Details);
+        }
+
+        [HttpGet]
+        public JsonResult GetRating(CustomerDashboard ID)
+        {
+            ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
+
+            if (_db.Ratings.Where(x => x.RatingTo == sr.ServiceProviderId).Count() > 0)
+            {
+                decimal avgrating = _db.Ratings.Where(x => x.RatingTo == sr.ServiceProviderId).Average(x => x.Ratings);
+
+
+
+                CustomerDashboard customerDashboard = new CustomerDashboard();
+                customerDashboard.AverageRating = (float)decimal.Round(avgrating, 1, MidpointRounding.AwayFromZero);
+
+                User sp = _db.Users.Where(x => x.UserId == sr.ServiceProviderId).FirstOrDefault();
+                customerDashboard.UserProfilePicture = "/images/" + sp.UserProfilePicture;
+                customerDashboard.ServiceProvider = sp.FirstName + " " + sp.LastName;
+
+                return new JsonResult(customerDashboard);
+            }
+            return new JsonResult(null);
+        }
+
+        [HttpPost]
+        public IActionResult AddNewAddress(UserAddress useradd)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+
+                Console.WriteLine("Inside Addnew address 1");
+                int Id = -1;
+
+
+                if (HttpContext.Session.GetInt32("userId") != null)
+                {
+                    Id = (int)HttpContext.Session.GetInt32("userId");
+                }
+                else if (Request.Cookies["userId"] != null)
+                {
+                    Id = int.Parse(Request.Cookies["userId"]);
+
+                }
+                Console.WriteLine("Inside Addnew address 2");
+                Console.WriteLine(Id);
+
+                useradd.UserId = Id;
+                useradd.IsDefault = false;
+                useradd.IsDeleted = false;
+                User user = _db.Users.Where(x => x.UserId == Id).FirstOrDefault();
+                useradd.Email = user.Email;
+                var result = _db.UserAddresses.Add(useradd);
+                Console.WriteLine("Inside Addnew address 3");
+                _db.SaveChanges();
+
+                Console.WriteLine("Inside Addnew address 4");
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+
+                return Ok(Json("false"));
+
+            }
+            return View();
         }
 
         [HttpPost]
@@ -660,7 +580,7 @@ namespace WebApplication4.Controllers
         }
 
         /*----- Add User Address -----*/
-        public IActionResult AddNewUserAddress(WebApplication4.Models.UserAddress addr)
+        public IActionResult AddNewUserAddress(UserAddress addr)
         {
             int? Id = HttpContext.Session.GetInt32("userId");
             if (Id == null)
@@ -729,10 +649,12 @@ namespace WebApplication4.Controllers
             }
             User user = _db.Users.FirstOrDefault(x => x.UserId == Id);
 
-
+            
             if (password.oldPassword == user.Password)
             {
                 user.Password = password.newPassword;
+
+                _db.Users.Update(user);
                 _db.SaveChanges();
                 return Ok(Json("true"));
             }
@@ -743,6 +665,45 @@ namespace WebApplication4.Controllers
 
 
         }
+
+        public IActionResult RateServiceProvider(Rating rating)
+        {
+            int? Id = -1;
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = HttpContext.Session.GetInt32("userId");
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            if (Id != null)
+            {
+                if (_db.Ratings.Where(x => x.ServiceRequestId == rating.ServiceRequestId).Count() > 0)
+                {
+                    return Ok(Json("false"));
+                }
+
+
+                rating.RatingDate = DateTime.Now;
+                ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == rating.ServiceRequestId);
+                rating.RatingTo = (int)sr.ServiceProviderId;
+                rating.RatingFrom = (int)Id;
+                Console.WriteLine(rating.Ratings);
+
+                var result = _db.Ratings.Add(rating);
+                _db.SaveChanges();
+
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+            }
+            return Ok(Json("false"));
+        }
+
 
     }
 }
