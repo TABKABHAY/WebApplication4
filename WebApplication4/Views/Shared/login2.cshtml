@@ -15,13 +15,13 @@
         <form method="post" asp-controller="Home" asp-action="Login2">
             <div class="container">
                 <label>User NAME</label>
-                <input type="text" asp-for="username" placeholder="Enter Username" required>
+                <input type="text" asp-for="Username" placeholder="Enter Username" required>
 
                 <label>Password</label>
-                <input type="password" asp-for="password" placeholder="Enter Password" required>
+                <input type="password" asp-for="Password" placeholder="Enter Password" required>
 
                 <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                    <input type="checkbox" checked="checked" asp-for="Remember" name="remember"> Remember me
                 </label>
 
                 <input class="btn-primary" type="submit">

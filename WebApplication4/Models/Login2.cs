@@ -4,10 +4,10 @@ namespace WebApplication4.Models
 public class Login2
     {
         [Required]
-        public string username { get; set; }
+        public string Username { get; set; }
         [Required]
-        public string password { get; set; }
-        public bool remember { get; set; }
+        public string Password { get; set; }
+        public bool Remember { get; set; }
     }
 
 }

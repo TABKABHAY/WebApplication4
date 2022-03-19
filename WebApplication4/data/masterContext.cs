@@ -22,7 +22,6 @@ namespace WebApplication4.data
         public virtual DbSet<ContactUs> ContactUs { get; set; }
         public virtual DbSet<ContactUsAttachment> ContactUsAttachments { get; set; }
         public virtual DbSet<FavoriteAndBlocked> FavoriteAndBlockeds { get; set; }
-        public virtual DbSet<Login2> Logins { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
         public virtual DbSet<ServiceRequestAddress> ServiceRequestAddresses { get; set; }

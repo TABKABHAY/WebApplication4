@@ -1,22 +1,11 @@
-﻿ using Microsoft.AspNetCore.Mvc;
-using MailKit.Net.Smtp;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using WebApplication4.Models;
-using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
-using System.Net.Mail;
 using MimeKit;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
-using System.Reflection.Metadata;
-using Syncfusion.EJ2.Navigations;
-using Syncfusion.EJ2.Grids;
-using Org.BouncyCastle.Crypto.Generators;
 using WebApplication4.data;
 
 namespace WebApplication4.Controllers
@@ -117,16 +106,13 @@ namespace WebApplication4.Controllers
         {
             if (ModelState.IsValid)
             {
-                string password = db.Users.FirstOrDefault(x => x.Email == user.username).Password;
-
-                if (db.Users.Where(x => x.Email == user.username).Count() > 0)
+                if (db.Users.Where(x => x.Email == user.Username && x.Password == user.Password).Count() > 0)
                 {
-
-                    var U = db.Users.FirstOrDefault(x => x.Email == user.username);
+                    var U = db.Users.FirstOrDefault(x => x.Email == user.Username );
 
                     Console.WriteLine("1");
 
-                    if (user.remember == true)
+                    if (user.Remember == true)
                     {
                         CookieOptions cookieRemember = new CookieOptions();
                         cookieRemember.Expires = DateTime.Now.AddSeconds(604800);

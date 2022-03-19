@@ -9,43 +9,62 @@
 <body>
     <!-- !PAGE CONTENT header -->
     <header class="hdr1">
+
         <div class="head">
             <div class="imhlogo"><a asp-controller="home" asp-action="Index"> <img src='~/image/logo-large.png' alt="logo" class="logo"> </a></div>
-            <div class="leftblock">
-                <a class="login" asp-controller="home" asp-action="BookingService">bookcleaner</a>
-                <a class="pargaraph" asp-controller="home" asp-action="Price">prices</a>
-                <a class="pargaraph">ourguarantee</a>
-                <a class="pargaraph">blog</a>
-                <a class="pargaraph" asp-controller="home" asp-action="Contact">Contact</a>
-                <a class="login" onclick="document.getElementById('id01').style.display='block'">Login</a>
-                <a class="login" asp-controller="home" asp-action="Service_Provider_Become_a_Pro">Become Helper</a>
+
+            @if (ViewBag.Name = null)
+            {
+                    <div class="leftblock">
+                        <a class="login" asp-controller="home" asp-action="BookingService">bookcleaner</a>
+                        <a class="pargaraph" asp-controller="home" asp-action="Price">prices</a>
+                        <a class="pargaraph">ourguarantee</a>
+                        <a class="pargaraph">blog</a>
+                        <a class="pargaraph" asp-controller="home" asp-action="Contact">Contact</a>
+                        <a class="login" onclick="document.getElementById('id01').style.display='block'">Login</a>
+                        <a class="login" asp-controller="home" asp-action="Service_Provider_Become_a_Pro">Become Helper</a>
+                    </div>
+
+                }
+
+                else
+            {
+                    <div class="leftblock">
+                        <a class="login" asp-controller="home" asp-action="BookingService">bookcleaner</a>
+                        <a class="pargaraph" asp-controller="home" asp-action="Price">prices</a>
+                        <a class="pargaraph">ourguarantee</a>
+                        <a class="pargaraph">blog</a>
+                        <a class="pargaraph" asp-controller="home" asp-action="Contact">Contact</a>
+                        <a class="login" onclick="document.getElementById('id01').style.display='block'">Logout</a>
+                        <a class="login" asp-controller="home" asp-action="Service_Provider_Become_a_Pro">Become Helper</a>
+                    </div>
+
+                }
+                <div class="hembg">
+                    <button onclick="w3_open()">☰</button>
+                </div>
             </div>
-            <div class="hembg">
-                <button onclick="w3_open()">☰</button>
-            </div>
-        </div>
-        <!-- !PAGE CONTENT header -->
-        <!-- Sidebar -->
-        <div class="nevdata" onclick="document.getElementById('nevdata').style.display='none'">
-            <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="display:none;">
-                <button onclick="w3_close()" class="w3-bar-item w3-large">Close  × </button>
-                <a class="w3-bar-item w3-button" asp-controller="home" asp-action="BookingService">bookcleaner</a>
-                <a class="w3-bar-item w3-button" asp-controller="home" asp-action="Price">prices</a>
-                <a class="w3-bar-item w3-button">ourguarantee</a>
-                <a class="w3-bar-item w3-button">blog</a>
-                <a class="w3-bar-item w3-button" asp-controller="home" asp-action="Contact">Contact</a>
+                <!-- !PAGE CONTENT header -->
+                <!-- Sidebar -->
+                <div class="nevdata" onclick="document.getElementById('nevdata').style.display='none'">
+                    <div class="w3-sidebar w3-bar-block w3-border-right" id="mySidebar" style="display:none;">
+                        <button onclick="w3_close()" class="w3-bar-item w3-large">Close  × </button>
+                        <a class="w3-bar-item w3-button" asp-controller="home" asp-action="BookingService">bookcleaner</a>
+                        <a class="w3-bar-item w3-button" asp-controller="home" asp-action="Price">prices</a>
+                        <a class="w3-bar-item w3-button">ourguarantee</a>
+                        <a class="w3-bar-item w3-button">blog</a>
+                        <a class="w3-bar-item w3-button" asp-controller="home" asp-action="Contact">Contact</a>
 
 
-                <a class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'">Login</a>
-                <a class="w3-bar-item w3-button" asp-controller="home" asp-action="Service_Provider_Become_a_Pro">becomehelper</a>
-            </div>
-        </div>
-        <!-- Page Content -->
-    </header>
+                        <a class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'">Login</a>
+                        <a class="w3-bar-item w3-button" asp-controller="home" asp-action="Service_Provider_Become_a_Pro">becomehelper</a>
+                    </div>
+                </div>
+                <!-- Page Content -->
+            </header>
     <!-- !PAGE CONTENT 1 -->
     @Html.Partial("login2")
     @Html.Partial("_ForgotPassword")
-
     <div>
         @RenderBody()
     </div>
