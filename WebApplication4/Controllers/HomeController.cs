@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using MimeKit;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 using WebApplication4.data;
+using WebApplication4.ViewModel;
+using System.Collections.Generic;
 
 namespace WebApplication4.Controllers
 {
@@ -60,10 +62,6 @@ namespace WebApplication4.Controllers
         {
             return View();
         }
-        public IActionResult CoustomerDashboard()
-        {
-            return View();
-        }
 
 
         [HttpPost]
@@ -99,6 +97,10 @@ namespace WebApplication4.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -122,7 +124,7 @@ namespace WebApplication4.Controllers
 
                     if (U.UserTypeId == 0)
                     {
-                        return RedirectToAction("CustomerDashboard", "Customer");
+                        return RedirectToAction("CustomerDashboard", "Home");
                     }
                     /* else if (user.UserTypeId == 2)
                       {
@@ -133,20 +135,109 @@ namespace WebApplication4.Controllers
                           return RedirectToAction("ServiceRequest", "Admin");
                       }*/
 
-                    return RedirectToAction("CustomerDashboard", "Customer");
+                    return RedirectToAction("CustomerDashboard", "Home");
                 }
                 else
                 {
                     TempData["add"] = "alert show";
                     TempData["fail"] = "username and password are invalid";
-                    return RedirectToAction("Index", "Public", new { loginFail = "true" });
+                    return RedirectToAction("Index", "Home", new { loginFail = "true" });
 
                 }
             }
 
             TempData["add"] = "alert show";
             TempData["fail"] = "username and password are required";
-            return RedirectToAction("Index", "Public", new { loginModal = "true" });
+            return RedirectToAction("Index", "Home", new { loginModal = "true" });
+
+        }
+
+        public IActionResult CustomerDashboard()
+        {
+
+            var userTypeId = -1;
+            User user = null;
+
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+
+                user = db.Users.Find(HttpContext.Session.GetInt32("userId"));
+                ViewBag.Name = user.FirstName;
+                ViewBag.UserType = user.UserTypeId;
+
+                userTypeId = user.UserTypeId;
+
+
+
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+                user = db.Users.FirstOrDefault(x => x.UserId == Convert.ToInt32(Request.Cookies["userId"]));
+                ViewBag.Name = user.FirstName;
+                ViewBag.UserType = user.UserTypeId;
+                userTypeId = user.UserTypeId;
+            }
+            if (userTypeId == 0)
+            {
+                List<CustomerDashboard> dashboard = new List<CustomerDashboard>();
+
+
+
+                //var ServiceTable = _db.ServiceRequests.Where(x => (x.UserId == user.UserId) && (x.Status == 1 || x.Status == 2)).ToList();
+
+                var ServiceTable = db.ServiceRequests.Where(x => x.UserId == user.UserId).ToList();
+
+                //var ServiceTable = _db.ServiceRequests.Where(x=>x.UserId==user.UserId ).ToList();
+                if (ServiceTable.Any())  /*ServiceTable.Count()>0*/
+                {
+                    foreach (var service in ServiceTable)
+                    {
+
+                        CustomerDashboard dash = new CustomerDashboard();
+                        dash.ServiceRequestId = service.ServiceRequestId;
+                        var StartDate = service.ServiceStartDate.ToString();
+                        //dash.Date = StartDate.Substring(0, 10);
+                        //dash.StartTime = StartDate.Substring(11);
+                        dash.Date = service.ServiceStartDate.ToString("dd/MM/yyyy");
+                        dash.StartTime = service.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                        var totaltime = (double)(service.ServiceHours + service.ExtraHours);
+                        dash.EndTime = service.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                        dash.Status = (int)service.Status;
+                        dash.TotalCost = service.TotalCost;
+
+                        if (service.ServiceProviderId != null)
+                        {
+
+                            User sp = db.Users.Where(x => x.UserId == service.ServiceProviderId).FirstOrDefault();
+
+                            dash.ServiceProvider = sp.FirstName + " " + sp.LastName;
+                            dash.UserProfilePicture = "/image/" + sp.UserProfilePicture;
+                            decimal rating;
+
+                            if (db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Count() > 0)
+                            {
+                                rating = db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Average(x => x.Ratings);
+                            }
+                            else
+                            {
+                                rating = 0;
+                            }
+                            dash.AverageRating = (float)decimal.Round(rating, 1, MidpointRounding.AwayFromZero);
+
+
+                        }
+
+                        dashboard.Add(dash);
+
+                    }
+                }
+
+                return PartialView(dashboard);
+            }
+
+
+            return RedirectToAction("Index", "Home", new { loginFail = "true" });
+
 
         }
 
@@ -189,7 +280,7 @@ namespace WebApplication4.Controllers
                 client.Dispose();
                 return RedirectToAction("Index", "Public", new { mailSended = "true" });
             }
-            return RedirectToAction("Index", "Public");
+            return RedirectToAction("Index", "HomeController");
         }
         [HttpPost]
         public IActionResult ResetPassword(ResetPassword rp)
@@ -201,7 +292,7 @@ namespace WebApplication4.Controllers
             db.SaveChanges();
 
 
-            return RedirectToAction("Index", "Public", new { loginModal = "true" });
+            return RedirectToAction("Index", "HomeController", new { loginModal = "true" });
         }
 
         public IActionResult logout()
@@ -209,7 +300,7 @@ namespace WebApplication4.Controllers
             HttpContext.Session.Clear();
 
             Response.Cookies.Delete("userId");
-            return RedirectToAction("Index", "Public", new { logoutModal = "true" });
+            return RedirectToAction("Index", "HomeController", new { logoutModal = "true" });
         }
 
     [HttpPost]
@@ -221,14 +312,14 @@ namespace WebApplication4.Controllers
             {
                 zc.UserId = 0;
                 HttpContext.Session.SetString("zipcode", zc.ZipCode);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "HomeController");
             }
             else
             {
                 _auc.Add(zc);
                 _auc.SaveChanges();
                 ViewBag.Message = "UserName or password is wrong";
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("About", "HomeController");
             }
         }
 

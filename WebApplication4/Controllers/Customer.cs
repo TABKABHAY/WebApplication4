@@ -8,7 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Generators;
 
-namespace webapplication1.Controllers
+namespace WebApplication4.Controllers
 {
     public class CustomerController : Controller
     {
@@ -303,96 +303,6 @@ namespace webapplication1.Controllers
             return new JsonResult(user);
         }
 
-        public IActionResult CustomerDashboard()
-        {
-
-            var userTypeId = -1;
-            User user = null;
-
-            if (HttpContext.Session.GetInt32("userId") != null)
-            {
-
-                user = _db.Users.Find(HttpContext.Session.GetInt32("userId"));
-                ViewBag.Name = user.FirstName;
-                ViewBag.UserType = user.UserTypeId;
-
-                userTypeId = user.UserTypeId;
-
-
-
-            }
-            else if (Request.Cookies["userId"] != null)
-            {
-                user = _db.Users.FirstOrDefault(x => x.UserId == Convert.ToInt32(Request.Cookies["userId"]));
-                ViewBag.Name = user.FirstName;
-                ViewBag.UserType = user.UserTypeId;
-                userTypeId = user.UserTypeId;
-            }
-            if (userTypeId == 0)
-            {
-                List<CustomerDashboard> dashboard = new List<CustomerDashboard>();
-
-
-
-                //var ServiceTable = _db.ServiceRequests.Where(x => (x.UserId == user.UserId) && (x.Status == 1 || x.Status == 2)).ToList();
-
-                var ServiceTable = _db.ServiceRequests.Where(x => x.UserId == user.UserId).ToList();
-
-                //var ServiceTable = _db.ServiceRequests.Where(x=>x.UserId==user.UserId ).ToList();
-                if (ServiceTable.Any())  /*ServiceTable.Count()>0*/
-                {
-                    foreach (var service in ServiceTable)
-                    {
-
-                        CustomerDashboard dash = new CustomerDashboard();
-                        dash.ServiceRequestId = service.ServiceRequestId;
-                        var StartDate = service.ServiceStartDate.ToString();
-                        //dash.Date = StartDate.Substring(0, 10);
-                        //dash.StartTime = StartDate.Substring(11);
-                        dash.Date = service.ServiceStartDate.ToString("dd/MM/yyyy");
-                        dash.StartTime = service.ServiceStartDate.AddHours(0).ToString("HH:mm ");
-                        var totaltime = (double)(service.ServiceHours + service.ExtraHours);
-                        dash.EndTime = service.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
-                        dash.Status = (int)service.Status;
-                        dash.TotalCost = service.TotalCost;
-
-                        if (service.ServiceProviderId != null)
-                        {
-
-                            User sp = _db.Users.Where(x => x.UserId == service.ServiceProviderId).FirstOrDefault();
-
-                            dash.ServiceProvider = sp.FirstName + " " + sp.LastName;
-                            dash.UserProfilePicture = "/image/" + sp.UserProfilePicture;
-                            decimal rating;
-
-                            if (_db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Count() > 0)
-                            {
-                                rating = _db.Ratings.Where(x => x.RatingTo == service.ServiceProviderId).Average(x => x.Ratings);
-                            }
-                            else
-                            {
-                                rating = 0;
-                            }
-                            dash.AverageRating = (float)decimal.Round(rating, 1, MidpointRounding.AwayFromZero);
-
-
-                        }
-
-                        dashboard.Add(dash);
-
-                    }
-                }
-
-                return PartialView(dashboard);
-            }
-
-
-            return RedirectToAction("Index", "Public", new { loginFail = "true" });
-
-
-        }
-
-      
         [HttpGet]
         public JsonResult DashbordServiceDetails(CustomerDashboard ID)
         {
