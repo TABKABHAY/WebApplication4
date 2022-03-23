@@ -13,7 +13,7 @@
         <div class="head">
             <div class="imhlogo"><a asp-controller="home" asp-action="Index"> <img src='~/image/logo-large.png' alt="logo" class="logo"> </a></div>
 
-            @if (ViewBag.Name = null)
+            @if (ViewBag.Name == null)
             {
                     <div class="leftblock">
                         <a class="login" asp-controller="home" asp-action="BookingService">bookcleaner</a>
