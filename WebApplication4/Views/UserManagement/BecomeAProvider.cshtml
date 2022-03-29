@@ -75,7 +75,7 @@
                     @TempData["msg"]
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-      <form  asp-controller="UserManagement" asp-action="BecomeAProvider" method='post'>
+      <form  asp-controller="Home" asp-action="BecomeAProvider" method='post'>
         <div class="form-group">
            <span asp-validation-for="FirstName" class="formwarning"></span>
           <input  asp-for="FirstName" class="form-control become-service-provider-form-inputs" placeholder="First name" >

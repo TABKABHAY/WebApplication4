@@ -1,26 +1,18 @@
-﻿using System;
-using WebApplication4.Models;
-
-namespace WebApplication4.ViewModel
+﻿namespace WebApplication4.ViewModel
 {
-    public class CustomerDashboard
+    public class ServiceProviderDashboard
     {
-
         public int ServiceRequestId { get; set; }
 
+    
         public string Date { get; set; }
 
         public string StartTime { get; set; }
 
         public string EndTime { get; set; }
 
-        public string ServiceProvider { get; set; }
-        public string UserProfilePicture { get; set; }
-
-        public decimal SPRatings { get; set; }
-
-        public string SPAvatar { get; set; }
-
+        public string CustomerName { get; set; }
+        
         public decimal Duration { get; set; }
 
         public int Status { get; set; }
@@ -39,15 +31,11 @@ namespace WebApplication4.ViewModel
 
         public string Address { get; set; }
 
-        public string PhoneNo { get; set; }
-
-        public string Email { get; set; }
+        public string ZipCode { get; set; }
 
         public string Comments { get; set; }
-        public float AverageRating { get; set; }
-
-
-
+       
+        public bool HasPet { get; set; }
 
 
     }

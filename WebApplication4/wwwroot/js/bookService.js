@@ -116,7 +116,7 @@ function postalSubmit() {
 
     $.ajax({
         type: 'POST',
-        url: '/Customer/ValidPostalCode',
+        url: '/Home/ValidPostalCode',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -154,7 +154,7 @@ function scheduleSubmit() {
 
     $.ajax({
         type: 'POST',
-        url: '/Customer/ScheduleService',
+        url: '/Home/ScheduleService',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -184,7 +184,7 @@ function loadAddress() {
 
     $.ajax({
         type: 'get',
-        url: '/customer/detailsservice',
+        url: '/Home/detailsservice',
         contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
         data: data,
 
@@ -250,7 +250,7 @@ function saveAddress() {
 
     $.ajax({
         type: 'POST',
-        url: '/Customer/AddNewAddress',
+        url: '/Home/AddNewAddress',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -353,7 +353,7 @@ function completeBookService() {
 
     $.ajax({
         type: 'post',
-        url: '/customer/completebooking',
+        url: '/Home/completebooking',
         contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
         data: data,
         success: function (result) {

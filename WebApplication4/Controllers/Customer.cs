@@ -46,7 +46,7 @@ namespace WebApplication4.Controllers
             }
             TempData["add"] = "alert show";
             TempData["fail"] = "Please Login to book service";
-            return RedirectToAction("Index", "Public", new { loginFail = "true" });
+            return RedirectToAction("Index", "Home", new { loginFail = "true" });
 
         }
 
