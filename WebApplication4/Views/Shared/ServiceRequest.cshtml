@@ -1,164 +1,171 @@
 ﻿@model IEnumerable<WebApplication4.ViewModel.ServiceProviderDashboard>;
 
-<head>
-    <link rel="stylesheet" href="~/css//ServiceProviderDeshboaed.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+        <link rel="stylesheet" href="~/css//ServiceProviderDeshboard.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+    <div id="NewServiceRequest" class="tab-contant">
 
-<div id="NewServiceRequest" class="tab-contant">
+        <div class="clearfix">
+            <div class="d-flex justify-content-between">
+                <p class="alignleft "> Customer Service Request </p>
 
-    <div class="clearfix">
-        <div class="d-flex justify-content-between">
-            <p class="alignleft "> Customer Service Request </p>
+                <a asp-controller="Home" asp-action="BookService"> <button class="alignright ">Add new request</button></a>
 
-            <a asp-controller="Home" asp-action="BookService"> <button class="alignright ">Add new request</button></a>
-
-        </div>
-        <table id="SPServiceRequestTable" class="table">
+            </div>
+            <table id="SPServiceRequestTable" class="table">
 
 
-            <thead class="table-light">
-                <tr class="text-center">
-                    <th scope="col" style="width:10%">  ID</th>
-                    <th scope="col" style="width:20%"> Service Date</th>
-                    <th scope="col" style="width:30%"> Customer Details</th>
-                    <th scope="col" style="width:15%"> Payment</th>
-                    <th scope="col" style="width:15%">  Conflict</th>
-                    <th scope="col" style="width:10%"> Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+                <thead class="table-light">
+                    <tr class="text-center">
+                        <th scope="col" style="width:10%">  ID</th>
+                        <th scope="col" style="width:20%"> Service Date</th>
+                        <th scope="col" style="width:30%"> Customer Details</th>
+                        <th scope="col" style="width:15%"> Payment</th>
+                        <th scope="col" style="width:15%">  Conflict</th>
+                        <th scope="col" style="width:10%"> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                @if (Model.Count() > 0)
+                    @if (Model.Count() > 0)
                 {
-    @foreach (var item in Model)
+                    @foreach (var item in Model)
     {
-<tr class="text-center" data-value=@item.ServiceRequestId>
-    <td data-label="Service ID">@item.ServiceRequestId</td>
-    <td data-label="Service Date">
+                    <tr class="text-center" data-value=@item.ServiceRequestId>
+                        <td data-label="Service ID">@item.ServiceRequestId</td>
+                        <td data-label="Service Date">
 
-        <div>
-            <span><img src="/image/calendar2.png" alt=""></span>
-            <span class="upcoming-date"><b>@item.Date</b></span>
+                            <div>
+                                <span><img src="/image/calendar2.png" alt=""></span>
+                                <span class="upcoming-date"><b>@item.Date</b></span>
+                            </div>
+                            <div>
+                                <span><img src="/image/layer-14.png" alt=""></span>
+                                <span>@item.StartTime - @item.EndTime</span>
+                            </div>
+                        </td>
+                        <td class="text-start" data-lable="Customer Details">
+                            <div class="ms-4">@item.CustomerName</div>
+                            <div class="d-flex"><span><img class="me-0" src="/image/layer-15.png" alt=""></span> <span>@item.Address </span></div>
+                        </td>
+
+                        <td data-lable="Payment" class="price">
+                            <span>@item.TotalCost</span> &euro;
+                        </td>
+                        <td data-lable="Time Conflict">
+                            @{ string conflictIdtemp = "Conflict" + @item.ServiceRequestId; }
+                            <a class="newReqConflictBtn d-none" id=@conflictIdtemp>Conflict</a>
+                        </td>
+                        <td data-lable="Actions">
+                            <a class="newReqAcceptBtn">Accept</a>
+                        </td>
+
+                    </tr>
+}}
+
+
+
+                </tbody>
+
+
+            </table>
+
+
         </div>
-        <div>
-            <span><img src="/image/layer-14.png" alt=""></span>
-            <span>@item.StartTime - @item.EndTime</span>
-        </div>
-    </td>
-    <td class="text-start" data-lable="Customer Details">
-        <div class="ms-4">@item.CustomerName</div>
-        <div class="d-flex"><span><img class="me-0" src="/image/layer-15.png" alt=""></span> <span>@item.Address </span></div>
-    </td>
-
-    <td data-lable="Payment" class="price">
-        <span>@item.TotalCost</span> &euro;
-    </td>
-    <td data-lable="Time Conflict">
-        @{ string conflictIdtemp = "Conflict" + @item.ServiceRequestId; }
-        <a class="newReqConflictBtn d-none" id=@conflictIdtemp>Conflict</a>
-    </td>
-    <td data-lable="Actions">
-        <a class="newReqAcceptBtn">Accept</a>
-    </td>
-
-</tr>}}
-
-
-
-            </tbody>
-
-
-        </table>
 
 
     </div>
 
 
-</div>
+
+
+    <!--Sp New Service requ details model -->
+
+
+    <button id="spserviceReqdetailsbtn" data-bs-toggle="modal" data-bs-target="#detailsModelServiceRequest" class="d-none">details</button>
 
 
 
-
-<!--Sp New Service requ details model -->
-
-
-<button id="spserviceReqdetailsbtn" data-bs-toggle="modal" data-bs-target="#detailsModelServiceRequest" class="d-none">details</button>
-
-
-
-<div class="modal" tabindex="-1" id="detailsModelServiceRequest">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-start" style="padding:2% !important">
-            <div class="modal-header">
-                <h5 class="modal-title">Service Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body float-start row">
-                <div class="col">
-                    <h4 id="SpServiceReqDatetime"></h4>
-                    <p>Duration: <span id="SpServiceReqDuration"></span> </p>
-                    <hr>
-                    <p>Service id: <span id="SpServiceReqId"></span></p>
-                    <div class="row">
-                        <p class="col-2 d-inline">Extras: </p>
-                        <div class="col-10 d-inline" id="SpServiceReqExtra"></div>
-                    </div>
-
-                    <p>Total Payment: <span id="SpServiceReqAmount" class="price">&euro;</span> </p>
-                    <hr>
-                    <p>Customer Name:<span id="SpServiceReqCustomerName"></span></p>
-                    <p>Service Address: <span id="SpServiceReqAddress"></span></p>
-
-                    <hr>
-
-                    <p>Comments <span id="SpServiceReqComment"></span></p>
-
-                    <hr>
-
-                    <div id="detailPopUpNew">
-                        <button id="newServiceReqAccept" type="submit">Accept</button>
-                    </div>
-
-                    <div id="detailPopUpUpComing">
-                        <button id="newServiceReqCompleteBtn" type="submit">Complete</button>
-                        <button id="newServiceReqCancelBtn" type="submit">Cancel</button>
-                    </div>
+    <div class="modal" tabindex="-1" id="detailsModelServiceRequest">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-start" style="padding:2% !important">
+                <div class="modal-header">
+                    <h5 class="modal-title">Service Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
-                <div class="col" id="newServiceReqMap">
+                <div class="modal-body float-start row">
+                    <div class="col">
+                        <h4 id="SpServiceReqDatetime"></h4>
+                        <p>Duration: <span id="SpServiceReqDuration"></span> </p>
+                        <hr>
+                        <p>Service id: <span id="SpServiceReqId"></span></p>
+                        <div class="row">
+                            <p class="col-2 d-inline">Extras: </p>
+                            <div class="col-10 d-inline" id="SpServiceReqExtra"></div>
+                        </div>
+
+                        <p>Total Payment: <span id="SpServiceReqAmount" class="price">&euro;</span> </p>
+                        <hr>
+                        <p>Customer Name:<span id="SpServiceReqCustomerName"></span></p>
+                        <p>Service Address: <span id="SpServiceReqAddress"></span></p>
+
+                        <hr>
+
+                        <p>Comments <span id="SpServiceReqComment"></span></p>
+
+                        <hr>
+
+                        <div id="detailPopUpNew">
+                            <button id="newServiceReqAccept" type="submit">Accept</button>
+                        </div>
+
+                        <div id="detailPopUpUpComing">
+                            <button id="newServiceReqCompleteBtn" type="submit">Complete</button>
+                            <button id="newServiceReqCancelBtn" type="submit">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="col" id="newServiceReqMap">
 
 
 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @* alert popup*@
+
+    <button type="button" class="btn btn-primary d-none" id="acceptAlert" data-bs-toggle="modal" data-bs-target="#alertPopup">
+        alert popup
+    </button>
+
+    <div class="modal fade" id="alertPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="font-weight-bold">Service Request Status</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title" id="NewServiceAcceptStatus">  </h4>
+                    <h5 id="Model_SID"></h5>
                 </div>
 
             </div>
         </div>
     </div>
-</div>
 
+    <script src="~/js/ServiceProviderDeshboard.js"></script>
 
-
-@* alert popup*@
-
-<button type="button" class="btn btn-primary d-none" id="acceptAlert" data-bs-toggle="modal" data-bs-target="#alertPopup">
-    alert popup
-</button>
-
-<div class="modal fade" id="alertPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width:500px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="font-weight-bold">Service Request Status</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 class="modal-title" id="NewServiceAcceptStatus">  </h4>
-                <h5 id="Model_SID"></h5>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<script src="~/js/ServiceProviderDeshboard.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/r-2.2.9/rg-1.1.4/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+    <script src="~/js/ServiceProviderDeshboard.js"></script>

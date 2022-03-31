@@ -1,10 +1,53 @@
-﻿<head>
-    <link rel="stylesheet" href="~/css//ServiceProviderDeshboaed.css">
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+    <link rel="stylesheet" href="~/css//ServiceProviderDeshboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+
 
 <div id="ServiceHistory" class="tab-contant">
     <h1>Service History</h1>
+    <div class="d-flex justify-content-between">
+        <p class="alignleft"> Service History </p>
+        <button id="export" class="ServiceHistroyExport">Export</button>
+    </div>
+
+    <table id="ProviderServiceHistoryTable" class="table">
+        <thead class="table-light">
+            <tr style="text-align:center">
+                <th scope="col" style="width:20%;">Service ID <img src="/image/sort.png" alt="..."></th>
+                <th scope="col" style="width:30%">Service date <img src="/image/sort.png" alt="..."></th>
+                <th scope="col" style="width:50%">Customers details <img src="/image/sort.png" alt="..."></th>
+
+            </tr>
+        </thead>
+        <tbody id="ServiceHistoryTbody">
+            <tr data-value="1">
+                <td data-label="Service ID">
+                    <p class="margin"></p>
+                </td>
+                <td data-label="Service date">
+                    <div>
+                        <img src="/image/calendar2.png" alt="calender">
+                    </div>
+                    <img src="/image/layer-14.png" alt="clock">
+                </td>
+                <td class="text-start" data-lable="Customer Details">
+                    <div class="ms-4"></div>
+                    <div class="d-flex">
+                        <span><img class="me-0" src="/image/layer-15.png" alt=""></span> <span>
+                        </span>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
 </div>
 
 <script src="~/js/ServiceProviderDeshboard.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/r-2.2.9/rg-1.1.4/datatables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>

@@ -39,7 +39,7 @@ document.getElementById(vTabId).click();
 
 //    $.ajax({
 
-//        url: '/ServiceProvider/SPServiceRequest',
+//        url: '/Home/SPServiceRequest',
 //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 
 
@@ -57,7 +57,7 @@ $(document).on('click', '#NewServiceRequestTabBtn', function () {
 
     //$.ajax({
 
-    //   url: '/ServiceProvider/SPServiceRequest',
+    //   url: '/Home/SPServiceRequest',
     //   contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
     //});
 
@@ -95,7 +95,7 @@ function getAllServiceDetails() {
     data.ServiceRequestId = parseInt(serviceRequestId);
     $.ajax({
         type: 'GET',
-        url: '/ServiceProvider/getAllDetails',
+        url: '/Home/getAllDetails',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -218,7 +218,7 @@ $("#newServiceReqAccept").on('click', function () {
     data.ServiceRequestId = parseInt(serviceRequestId);
     $.ajax({
         type: 'GET',
-        url: '/ServiceProvider/acceptService',
+        url: '/Home/acceptService',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -289,7 +289,7 @@ $(".newReqConflictBtn").on('click', function () {
 
     $.ajax({
         type: 'GET',
-        url: '/ServiceProvider/ConflictDetails',
+        url: '/Home/ConflictDetails',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {
@@ -332,7 +332,7 @@ function getUpcomingServiceTable() {
 
     $.ajax({
         type: "GET",
-        url: '/ServiceProvider/getUpcomingService',
+        url: '/Home/getUpcomingService',
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         success: function (result) {
             $('#UpcomingServiceTbody').empty();
@@ -397,7 +397,7 @@ document.getElementById("SpCancelRequestBtn").addEventListener("click", function
 
     $.ajax({
         type: 'POST',
-        url: '/ServiceProvider/cancelRequest',
+        url: '/Home/cancelRequest',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data: data,
         success: function (result) {

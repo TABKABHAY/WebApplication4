@@ -582,13 +582,13 @@ function getAdminUserData() {
 
                 //for user type
 
-                var userTypeTemp = "Customer";
+                var userTypeTemp = "Home";
 
                 if (result[i].userTypeId == 1) {
-                    userTypeTemp = "ServiceProvider";
+                    userTypeTemp = "Home";
                 }
                 else if (result[i].userTypeId == 2) {
-                    userTypeTemp = "Admin";
+                    userTypeTemp = "Home";
                 }
 
                 //for active disactive

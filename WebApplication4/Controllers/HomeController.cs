@@ -83,13 +83,14 @@ namespace WebApplication4.Controllers
                 uc.UserTypeId = 1;
                 _auc.Add(uc);
                 _auc.SaveChanges();
+                TempData["add"] = "alert show";
                 return RedirectToAction("Index", "Home");
             }
             else
             {
                 string errormsg = "Email is already registered...login instead !";
                 TempData["ErrorMessage"] = errormsg;
-                return RedirectToAction("BecomeHelper", "Home");
+                return RedirectToAction("Service_Provider_Become_a_Pro", "Home");
             }
         }
 
@@ -269,7 +270,7 @@ namespace WebApplication4.Controllers
 
                 BodyBuilder bodyBuilder = new BodyBuilder();
                 bodyBuilder.HtmlBody = "<h1>Reset your password by click below link</h1>" +
-                    "<a href='" + Url.Action("ResetPassword", "UserManagement", new { userId = user.UserId }, "https") + "'>Reset Password</a>";
+                    "<a href='" + Url.Action("ResetPassword", "Home", new { userId = user.UserId }, "https") + "'>Reset Password</a>";
 
 
                 message.Body = bodyBuilder.ToMessageBody();
@@ -968,7 +969,7 @@ namespace WebApplication4.Controllers
             if (result1 != null && result2 != null)
             {
 
-                _ = sendMail(serviceRequest);
+                _ = SendMail(serviceRequest);
                 return Json("true");
             }
             else
@@ -1169,7 +1170,7 @@ namespace WebApplication4.Controllers
         }
 
 
-        public async Task sendMail(ServiceRequest req)
+        public async Task SendMail(ServiceRequest req)
         {
 
 
@@ -1198,8 +1199,7 @@ namespace WebApplication4.Controllers
 
                     MimeMessage message = new MimeMessage();
 
-                    MailboxAddress from = new MailboxAddress("Helperland",
-                    "ajexmex@gmail.com");
+                    MailboxAddress from = new MailboxAddress("Helperland","ajexmex@gmail.com");
                     message.From.Add(from);
 
                     MailboxAddress to = new MailboxAddress(temp.FirstName, temp.Email);
@@ -1234,52 +1234,11 @@ namespace WebApplication4.Controllers
 
 
 
-        //refund
 
 
 
 
-        public JsonResult GetAdminRefundData(ServiceRequest Id)
-        {
 
-
-            Console.WriteLine(Id.ServiceRequestId);
-            var req = db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == Id.ServiceRequestId);
-
-
-            var myData = new
-            {
-                TotalCost = req.TotalCost,
-                RefundAmount = req.RefundedAmount
-
-            };
-
-            return Json(myData);
-        }
-
-        public string AdminRefundUpdate(ServiceRequest req)
-        {
-            Console.WriteLine(req.RefundedAmount);
-            Console.WriteLine(req.ServiceRequestId);
-
-
-            ServiceRequest obj = db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == req.ServiceRequestId);
-
-
-            obj.RefundedAmount = req.RefundedAmount;
-
-            var result = db.ServiceRequests.Update(obj);
-
-            db.SaveChanges();
-
-            if (result != null)
-            {
-
-                return "true";
-            }
-
-            return "error";
-        }
 
     }
 }

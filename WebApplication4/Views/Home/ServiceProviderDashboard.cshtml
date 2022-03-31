@@ -9,12 +9,15 @@
 
 
 <head>
-    <link rel="stylesheet" href="~/css//ServiceProviderDeshboaed.css">
+    <link rel="stylesheet" href="~/css//ServiceProviderDeshboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+
 </head>
 @section Custom
  {
-    <link rel="stylesheet" href="~/css//ServiceProviderDeshboaed.css">
+    <link rel="stylesheet" href="~/css//ServiceProviderDeshboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 }
 
@@ -47,7 +50,7 @@
 
         </button>
 
-        <button class="tablinks" onclick="Sp_TabNav(event, 'ServiceSchedule')" id="ServiceScheduleTabBtn"> Service Schedule </button>
+        <button class="tablinks" onclick="Sp_TabNav(event, 'ServicreScedule')" id="ServicreSceduleTabBtn"> Service Schedule </button>
         <button class="tablinks" onclick="Sp_TabNav(event, 'ServiceHistory')" id="ServiceHistoryTabBtn">Service History</button>
         <button class="tablinks" onclick="Sp_TabNav(event, 'MyRating')" id="MyRatingTabBtn">My Rating</button>
         <button class="tablinks " onclick="Sp_TabNav(event, 'BlockCustomer')" id="BlockCustomerTabBtn">Block Customer</button>
@@ -63,7 +66,8 @@
     @await Html.PartialAsync("ServiceRequest")
     @await Html.PartialAsync("Rating")
     @await Html.PartialAsync("BlockCustomer")
-
+    @await Html.PartialAsync("Setting1")
+    @await Html.PartialAsync("ServiceScedule")
 
 
 
@@ -93,5 +97,6 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/r-2.2.9/rg-1.1.4/datatables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
 <script src="~/js/ServiceProviderDeshboard.js"></script>

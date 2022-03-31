@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -17,12 +19,29 @@ namespace WebApplication4.Models
             ServiceRequestUsers = new HashSet<ServiceRequest>();
             UserAddresses = new HashSet<UserAddress>();
         }
-
         public int UserId { get; set; }
+        [RegularExpression(@"^[a-zA-Z]{3,30}$", ErrorMessage = "Please enter velid First Name")]
+        [Required(ErrorMessage = "Please Enter First Name")]
         public string FirstName { get; set; }
+
+        [RegularExpression(@"^[a-zA-Z]{3,30}$", ErrorMessage = "Please enter velid  Last Name")]
+        [Required(ErrorMessage = "Please Enter Last Name")]
         public string LastName { get; set; }
+        [Required]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter velid email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
+        [Required]
+        [RegularExpression(@"^.{6,14}$", ErrorMessage = "Please enter Stronge Password")]
         public string Password { get; set; }
+
+        [NotMapped] // Does not effect with your database
+        [Required(ErrorMessage = "Please Enter Confirm Password")]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Please Enter Valid Phone Number")]
+        [StringLength(10, ErrorMessage = "Please Enter Valid Phone Number")]
         public string Mobile { get; set; }
         public int UserTypeId { get; set; }
         public int? RoleId { get; set; }

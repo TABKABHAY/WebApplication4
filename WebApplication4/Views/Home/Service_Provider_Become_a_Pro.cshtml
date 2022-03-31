@@ -8,19 +8,29 @@
 <link rel="stylesheet" href="~/css/service_provider_become_pro.css">
 <section>
     <div class="backimge">
-        <form method="post" asp-controller="Home" asp-action="CreateForProvider">
+        <form method="post"asp-controller="Home" asp-action="CreateForProvider">
             <div class="frm">
                 <h1>REGISTER NOW</h1>
-                <input type="name"asp-for="FirstName" placeholder="first name"><br><br>
-                <input type="name"asp-for="LastName" placeholder="last name"><br><br>
-                <input type="email" asp-for="Email" placeholder="email address"><br><br>
+                <label class="form-label">First name</label><br />
+                <input type="name" asp-for="FirstName" placeholder="first name"><br><br>
+                <label class="form-label">Last name</label><br />
+                <input type="name" asp-for="LastName" placeholder="last name"><br><br>
+                <label class="form-label">Email</label><br />
+                <span asp-validation-for="Email" style="color:red"> @TempData["ErrorMe"]</span>
+                <input type="email" asp-for="Email" placeholder="email address">
+                <br><br>
+                <label class="form-label">Mobile</label><br />
                 <input type="number" asp-for="Mobile" placeholder="mobile number"><br><br>
+                <label class="form-label">Password</label><br />
                 <input type="passwrd" asp-for="Password" placeholder="password"><br><br>
+                <label class="form-label">Confirm Password</label><br />
                 <input type="passwrd" placeholder="confirm password"><br><br>
-                <input type="checkbox">
-                <label>Send me newsletters from Helperland</label><br><br>
-                <input type="checkbox">
-                <label>I accept terms and conditions &amp; privacy policy</label><br><br>
+                <label><input type="checkbox">Send me newsletters from Helperland</label><br><br>
+                <label> <input type="checkbox">I accept terms and conditions &amp; privacy policy</label><br><br>
+                <div style="color:red" class="@TempData["ErrorMessage"] alert-danger alert-dismissible fade" role="alert" id="loginFailAlert">
+
+                    @TempData["ErrorMessage"]
+                </div>
                 <iframe sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
                         scrolling="no" frameborder="0" name="a-6yfj6gjwyzpx" role="presentation" height="78" width="304"
                         src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=your_site_key&amp;co=ZmlsZTo.&amp;hl=en&amp;v=VZKEDW9wslPbEc9RmzMqaOAP&amp;size=normal&amp;cb=yb9ah540r25u"
@@ -38,7 +48,7 @@
         <div class="expsopded">
             <div class="page3">
                 <h2>Register yourself</h2>
-                <p class="">Provide your basic information to register yourself as a service provider.</p>
+                <p>Provide your basic information to register yourself as a service provider.</p>
             </div>
             <div class="logoin1">
                 <img src="~/image/wom.png" alt="helper" class="grp36">
@@ -50,13 +60,13 @@
             </div>
             <div class="page3">
                 <h2>Get service requests</h2>
-                <p class="">You will get service requests from customes depend on service area and profile.</p>
+                <p>You will get service requests from customes depend on service area and profile.</p>
             </div>
         </div>
         <div class="expsopded">
             <div class="page3">
                 <h2>Complete service</h2>
-                <p class="">Accept service requests from your customers and complete your work.</p>
+                <p>Accept service requests from your customers and complete your work.</p>
             </div>
             <div class="logoin1">
                 <img src="~/image/group-30.png" alt="helper" class="grp36">

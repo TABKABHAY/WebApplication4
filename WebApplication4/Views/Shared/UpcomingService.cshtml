@@ -1,38 +1,1 @@
-﻿    <link rel="stylesheet" href="~/css//ServiceProviderDeshboaed.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div id="UpcomingService" class="tab-contant">
-    <table id="UpcomingServiceTable" class="table">
-        <thead class="table-light">
-            <tr>
-                <th scope="col" style="width:15%">Service ID <img src="/image/sort.png" alt="..."></th>
-                <th scope="col" style="width:20%">Service date <img src="/image/sort.png" alt="..."></th>
-                <th scope="col" style="width:35%">Customers details <img src="/image/sort.png" alt="..."></th>
-                <th scope="col" style="width:15%">Completed</th>
-                <th scope="col" style="width:15%">Action</th>
-            </tr>
-        </thead>
-        <tbody id="UpcomingServiceTbody">
-        </tbody>
-    </table>
-</div>
-
-<div class="modal" tabindex="-1" id="SPdeleteModelServiceRequest">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px">
-        <div class="modal-content">
-            <input type="hidden" id="CancelRequestId" name="CancelRequestId" />
-            <div class="modal-header">
-                <h5 class="modal-title">Cancel Service Request</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4>Are you sure, want to cancel this request</h4>
-                <div class="text-center">
-                    <button class="customerCancel mt-2 cancel" type="button" data-bs-dismiss="modal" id="SpCancelRequestBtn">Yes, Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="~/js/ServiceProviderDeshboard.js"></script>
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css"><link rel="stylesheet" href="~/css//ServiceProviderDeshboard.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><div id="UpcomingService" class="tab-contant">    <table id="UpcomingServiceTable" class="table">        <thead class="table-light">            <tr>                <th scope="col" style="width:15%">Service ID <img src="/image/sort.png" alt="..."></th>                <th scope="col" style="width:20%">Service date <img src="/image/sort.png" alt="..."></th>                <th scope="col" style="width:35%">Customers details <img src="/image/sort.png" alt="..."></th>                <th scope="col" style="width:15%">Completed</th>                <th scope="col" style="width:15%">Action</th>            </tr>        </thead>        <tbody id="UpcomingServiceTbody">        </tbody>    </table></div><div class="modal" tabindex="-1" id="SPdeleteModelServiceRequest">    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px">        <div class="modal-content">            <input type="hidden" id="CancelRequestId" name="CancelRequestId" />            <div class="modal-header">                <h5 class="modal-title">Cancel Service Request</h5>                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>            </div>            <div class="modal-body">                <h4>Are you sure, want to cancel this request</h4>                <div class="text-center">                    <button class="customerCancel" type="button" data-bs-dismiss="modal" class="mt-2 cancel" id="SpCancelRequestBtn">Yes, Cancel</button>                </div>            </div>        </div>    </div></div><script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/r-2.2.9/rg-1.1.4/datatables.min.js"></script><script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script><script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script><script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script><script src="~/js/ServiceProviderDeshboard.js"></script>
