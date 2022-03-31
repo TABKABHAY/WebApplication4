@@ -1230,9 +1230,47 @@ namespace WebApplication4.Controllers
 
         }
 
+        public JsonResult GetAdminRefundData(ServiceRequest Id)
+        {
 
 
+            Console.WriteLine(Id.ServiceRequestId);
+            var req = db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == Id.ServiceRequestId);
 
+
+            var myData = new
+            {
+                TotalCost = req.TotalCost,
+                RefundAmount = req.RefundedAmount
+
+            };
+
+            return Json(myData);
+        }
+
+        public string AdminRefundUpdate(ServiceRequest req)
+        {
+            Console.WriteLine(req.RefundedAmount);
+            Console.WriteLine(req.ServiceRequestId);
+
+
+            ServiceRequest obj = db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == req.ServiceRequestId);
+
+
+            obj.RefundedAmount = req.RefundedAmount;
+
+            var result = db.ServiceRequests.Update(obj);
+
+            db.SaveChanges();
+
+            if (result != null)
+            {
+
+                return "true";
+            }
+
+            return "error";
+        }
 
 
 
