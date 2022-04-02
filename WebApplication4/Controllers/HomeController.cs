@@ -916,7 +916,7 @@ namespace WebApplication4.Controllers
 
             AdminUpdate AdminUpdate = new AdminUpdate();
 
-            AdminUpdate.address = db.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == Id.ServiceRequestId);
+            AdminUpdate.Address = db.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == Id.ServiceRequestId);
 
             DateTime starttime = db.ServiceRequests.Where(x => x.ServiceRequestId == Id.ServiceRequestId).Select(x => x.ServiceStartDate).FirstOrDefault();
 
@@ -954,12 +954,12 @@ namespace WebApplication4.Controllers
 
 
 
-            serviceRequestAddress.AddressLine1 = DTO.address.AddressLine1;
-            serviceRequestAddress.AddressLine2 = DTO.address.AddressLine2;
+            serviceRequestAddress.AddressLine1 = DTO.Address.AddressLine1;
+            serviceRequestAddress.AddressLine2 = DTO.Address.AddressLine2;
 
-            serviceRequestAddress.PostalCode = DTO.address.PostalCode;
-            serviceRequestAddress.City = DTO.address.City;
-            serviceRequestAddress.State = DTO.address.State;
+            serviceRequestAddress.PostalCode = DTO.Address.PostalCode;
+            serviceRequestAddress.City = DTO.Address.City;
+            serviceRequestAddress.State = DTO.Address.State;
 
             var result2 = db.ServiceRequestAddresses.Update(serviceRequestAddress);
             db.SaveChanges();
@@ -1009,7 +1009,7 @@ namespace WebApplication4.Controllers
                         MimeMessage message = new MimeMessage();
 
                         MailboxAddress from = new MailboxAddress("Helperland",
-                        "adminmaiid@gmail.com");
+                        "ajexmex@gmail.com");
                         message.From.Add(from);
 
                         MailboxAddress to = new MailboxAddress(temp.FirstName, temp.Email);
@@ -1026,7 +1026,7 @@ namespace WebApplication4.Controllers
 
                         SmtpClient client = new SmtpClient();
                         client.Connect("smtp.gmail.com", 587, false);
-                    mailto: client.Authenticate("adminmaiid@gmail.com", "adminmail.gfhyr#$");
+                    mailto: client.Authenticate("ajexmex@gmail.com", "Je#M6exex");
                         client.Send(message);
                         client.Disconnect(true);
                         client.Dispose();

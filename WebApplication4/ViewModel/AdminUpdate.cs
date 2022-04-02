@@ -7,7 +7,7 @@ namespace WebApplication4.ViewModel
 
 
 
-        public ServiceRequestAddress address { get; set; }
+        public ServiceRequestAddress Address { get; set; }
 
         public int ServiceRequestId { get; set; }
 
