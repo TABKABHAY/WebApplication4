@@ -56,8 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\UserManagement\BecomeAProvider.cshtml" />
-    <None Include="Views\UserManagement\CustomerSignUp.cshtml" />
     <None Include="wwwroot\image\calculator-banner.png.gz" />
     <None Include="wwwroot\image\group-18_2022-01-02 %281%29.zip" />
     <None Include="wwwroot\image\group-18_2022-01-02 %282%29.zip" />
